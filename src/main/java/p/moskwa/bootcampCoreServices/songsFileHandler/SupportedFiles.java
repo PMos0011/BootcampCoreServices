@@ -1,4 +1,5 @@
 package p.moskwa.bootcampCoreServices.songsFileHandler;
 
-public class XMLHandler {
+public enum SupportedFiles {
+    CSV, XML
 }

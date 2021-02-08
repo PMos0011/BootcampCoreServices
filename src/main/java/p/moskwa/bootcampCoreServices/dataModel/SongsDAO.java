@@ -7,17 +7,13 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlRootElement;
 import java.util.List;
 
 @JacksonXmlRootElement(localName = "songs")
-public class Songs {
+public class SongsDAO {
 
     @JacksonXmlProperty(localName = "song")
     @JacksonXmlElementWrapper(useWrapping = false)
-    private List<Song> songs;
+    private List<SongDAO> songDAOS;
 
-    public List<Song> getSongs() {
-        return songs;
-    }
-
-    public void setSongs(List<Song> songs) {
-        this.songs= songs;
+    public List<SongDAO> getSongs() {
+        return songDAOS;
     }
 }
