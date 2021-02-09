@@ -6,6 +6,7 @@ import p.moskwa.bootcampCoreServices.dataModel.Song;
 import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static p.moskwa.bootcampCoreServices.dataModel.Song.UID_SPLITTER;
 
 class SongMapperTest {
     private final String TITLE = "MyTitle";
@@ -25,5 +26,10 @@ class SongMapperTest {
         assertEquals(ALBUM, song.getAlbum());
         assertEquals(Categories.valueOf(CATEGORY.toUpperCase()), song.getCategory());
         assertEquals(Integer.parseInt(VOTES), song.getVotes());
+
+        String[] uid = song.getUid().split(UID_SPLITTER);
+        assertEquals(Categories.ROCK.name(), uid[0]);
+        assertEquals(AUTHOR, uid[1]);
+        assertEquals(TITLE, uid[2]);
     }
 }

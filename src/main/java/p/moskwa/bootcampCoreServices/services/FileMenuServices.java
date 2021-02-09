@@ -12,7 +12,6 @@ import java.util.stream.Stream;
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindow;
 
 public class FileMenuServices {
-
 private final SongDAOServices songDAOServices;
 
     public FileMenuServices() {

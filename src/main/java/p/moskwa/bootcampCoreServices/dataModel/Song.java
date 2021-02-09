@@ -1,11 +1,14 @@
 package p.moskwa.bootcampCoreServices.dataModel;
 
 public class Song {
+    public final static String UID_SPLITTER = "<!splitter!>";
+
     private String title;
     private String author;
     private String album;
     private Categories category;
     private Integer votes;
+    private String uid;
 
     public String getTitle() {
         return title;
@@ -45,6 +48,14 @@ public class Song {
 
     public void setVotes(Integer votes) {
         this.votes = votes;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     @Override

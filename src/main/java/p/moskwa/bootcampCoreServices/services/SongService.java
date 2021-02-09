@@ -7,6 +7,7 @@ import p.moskwa.bootcampCoreServices.mappers.SongMapper;
 
 import java.util.*;
 
+import static p.moskwa.bootcampCoreServices.dataModel.Song.UID_SPLITTER;
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindow;
 
 public class SongService {
@@ -42,6 +43,14 @@ public class SongService {
                     }
                 }
         );
+    }
+
+    public Song getSongFromUid(String songUid){
+        String[] uid = songUid.split(UID_SPLITTER);
+        return songList.getSongListHashMap().get(uid[0]).get(uid[1])
+                .stream()
+                .filter(song->song.getTitle().equals(uid[2]))
+                .findFirst().orElse(null);
     }
 
     private void addNewCategoryToList(HashMap<String, HashMap<String, List<Song>>> songListHashMap, Song newSong) {

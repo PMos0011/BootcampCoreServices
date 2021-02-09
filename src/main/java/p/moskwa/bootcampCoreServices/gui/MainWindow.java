@@ -18,11 +18,11 @@ public class MainWindow extends JFrame {
         MenuBar menuBar = new MenuBar();
         mainContentPanel = new MainContentPanel();
         sideBar = new SideBar();
-        songService= new SongService();
+        songService = new SongService();
         removeSongsServices = new RemoveSongsServices();
 
         this.setTitle("Bootcamp Core Services P. Moskwa");
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout(20, 0));
         this.setSize(1366, 768);
 
         this.add(menuBar.getMenu(), BorderLayout.NORTH);
@@ -55,14 +55,20 @@ public class MainWindow extends JFrame {
         return removeSongsServices;
     }
 
-    public void updateMainContent(){
-        if(removeSongsServices.isErrorToDisplay())
+    public void updateMainContent() {
+        if (removeSongsServices.isErrorToDisplay())
             mainContentPanel.displayInvalidSongs(removeSongsServices.getRemovedSongs());
         else
-            displaySong();
+            displaySongs();
     }
 
-    public void displaySong(){
+    public void displaySongs() {
         mainContentPanel.displaySongs(songService.getSongList());
+    }
+
+    public void displaySongDetails(String songUid) {
+        sideBar.displaySongDetails(
+                songService.getSongFromUid(songUid)
+        );
     }
 }
