@@ -1,6 +1,6 @@
 package p.moskwa.bootcampCoreServices.gui;
 
-import p.moskwa.bootcampCoreServices.services.RemoveSongsServices;
+import p.moskwa.bootcampCoreServices.services.RemovedSongsServices;
 import p.moskwa.bootcampCoreServices.services.SongService;
 
 import javax.swing.*;
@@ -12,14 +12,14 @@ public class MainWindow extends JFrame {
     private final MainContentPanel mainContentPanel;
     private final SideBar sideBar;
     private final SongService songService;
-    private final RemoveSongsServices removeSongsServices;
+    private final RemovedSongsServices removedSongsServices;
 
     public MainWindow() {
         MenuBar menuBar = new MenuBar();
         mainContentPanel = new MainContentPanel();
         sideBar = new SideBar();
         songService = new SongService();
-        removeSongsServices = new RemoveSongsServices();
+        removedSongsServices = new RemovedSongsServices();
 
         this.setTitle("Bootcamp Core Services P. Moskwa");
         this.setLayout(new BorderLayout(20, 0));
@@ -51,13 +51,13 @@ public class MainWindow extends JFrame {
         return songService;
     }
 
-    public RemoveSongsServices getRemoveSongsServices() {
-        return removeSongsServices;
+    public RemovedSongsServices getRemoveSongsServices() {
+        return removedSongsServices;
     }
 
     public void updateMainContent() {
-        if (removeSongsServices.isErrorToDisplay())
-            mainContentPanel.displayInvalidSongs(removeSongsServices.getRemovedSongs());
+        if (removedSongsServices.isErrorToDisplay())
+            mainContentPanel.displayInvalidSongs(removedSongsServices.getRemovedSongs());
         else
             displaySongs();
     }

@@ -6,11 +6,11 @@ import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
 import java.util.HashMap;
 import java.util.List;
 
-public class RemoveSongsServices {
+public class RemovedSongsServices {
 
     private final RemovedSongList removedSongList;
 
-    public RemoveSongsServices() {
+    public RemovedSongsServices() {
         removedSongList = new RemovedSongList();
     }
 

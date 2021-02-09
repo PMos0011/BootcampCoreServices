@@ -2,26 +2,26 @@ package p.moskwa.bootcampCoreServices.gui;
 
 import p.moskwa.bootcampCoreServices.dataModel.Song;
 import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
+import p.moskwa.bootcampCoreServices.services.MainContentService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.HashMap;
 import java.util.List;
 
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindow;
 
-public class MainContentPanel implements MouseListener {
+public class MainContentPanel{
     private final JPanel content;
-    private JLabel selectedLabel;
+    private final MainContentService mainContentService;
 
     public MainContentPanel() {
         content = new JPanel();
         content.setLayout(new FlowLayout(FlowLayout.LEFT));
         content.add(new JLabel("Nie mam jeszcze nic do wyświetlenia - "));
         content.add(new JLabel("wczytaj dane"));
-        selectedLabel = null;
+
+        mainContentService = new MainContentService();
     }
 
     public JPanel getContent() {
@@ -71,40 +71,8 @@ public class MainContentPanel implements MouseListener {
     private JLabel createSongLabel(Song song) {
         JLabel songLabel = new JLabel(song.toString());
         songLabel.setName(song.getUid());
-        songLabel.addMouseListener(this);
+        songLabel.addMouseListener(mainContentService);
         songLabel.setOpaque(true);
         return songLabel;
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent mouseEvent) {
-        JLabel label = (JLabel) mouseEvent.getComponent();
-        label.setBackground(Color.GRAY);
-
-        if (selectedLabel != null)
-            selectedLabel.setBackground(Color.WHITE);
-
-        selectedLabel = label;
-        getMainWindow().displaySongDetails(label.getName());
-    }
-
-    @Override
-    public void mousePressed(MouseEvent mouseEvent) {
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent mouseEvent) {
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent mouseEvent) {
-        if (mouseEvent.getComponent() != selectedLabel)
-            mouseEvent.getComponent().setBackground(Color.LIGHT_GRAY);
-    }
-
-    @Override
-    public void mouseExited(MouseEvent mouseEvent) {
-        if (mouseEvent.getComponent() != selectedLabel)
-            mouseEvent.getComponent().setBackground(Color.WHITE);
     }
 }
