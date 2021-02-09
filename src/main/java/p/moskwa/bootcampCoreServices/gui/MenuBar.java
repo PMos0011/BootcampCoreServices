@@ -1,6 +1,6 @@
 package p.moskwa.bootcampCoreServices.gui;
 
-import p.moskwa.bootcampCoreServices.eventHandlers.MenuEventHandlers;
+import p.moskwa.bootcampCoreServices.services.FileMenuServices;
 
 import javax.swing.*;
 
@@ -8,11 +8,11 @@ public class MenuBar {
 
     private final JMenuBar menu;
     private final FileChooser fileChooser;
-    private final MenuEventHandlers menuEventHandlers;
+    private final FileMenuServices fileMenuServices;
 
     public MenuBar() {
         fileChooser = new FileChooser();
-        menuEventHandlers = new MenuEventHandlers();
+        fileMenuServices = new FileMenuServices();
 
         menu = menuConstructor();
     }
@@ -32,13 +32,13 @@ public class MenuBar {
     private JMenu fileMenuConstructor() {
 
         JMenuItem openFile = new JMenuItem("Otwórz plik");
-        openFile.addActionListener(action -> menuEventHandlers.openFileAction(fileChooser.getFileChooser()));
+        openFile.addActionListener(action -> fileMenuServices.openFileAction(fileChooser.getFileChooser()));
 
         JMenuItem openDirectory = new JMenuItem("Otwórz folder");
-        openDirectory.addActionListener(action -> menuEventHandlers.openDirectoryAction(fileChooser.getFileChooser()));
+        openDirectory.addActionListener(action -> fileMenuServices.openDirectoryAction(fileChooser.getFileChooser()));
 
         JMenuItem exit = new JMenuItem("Zamknij");
-        exit.addActionListener(action -> menuEventHandlers.exitApplication());
+        exit.addActionListener(action -> fileMenuServices.exitApplication());
 
         JMenu fileMenu = new JMenu("Plik");
         fileMenu.add(openFile);

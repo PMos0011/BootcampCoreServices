@@ -10,6 +10,17 @@ public class SongDAO {
     public String category;
     public String votes;
 
+    public SongDAO() {
+    }
+
+    public SongDAO(String title, String author, String album, String category, String votes) {
+        this.title = title;
+        this.author = author;
+        this.album = album;
+        this.category = category;
+        this.votes = votes;
+    }
+
     @Override
     public String toString() {
         return "title='" + title + '\'' +

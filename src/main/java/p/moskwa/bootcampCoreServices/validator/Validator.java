@@ -1,6 +1,6 @@
 package p.moskwa.bootcampCoreServices.validator;
 
-import p.moskwa.bootcampCoreServices.dataModel.RemovedElements;
+import p.moskwa.bootcampCoreServices.dataModel.Categories;
 import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
 
 import java.util.ArrayList;
@@ -10,26 +10,18 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
-    public RemovedElements validateSongDAOList(List<SongDAO> songDAOList, String fileName) {
-
-        RemovedElements removedElements = new RemovedElements();
+    public List<SongDAO> validateSongDAOList(List<SongDAO> songDAOList) {
+        List<SongDAO> removedSongs = new ArrayList<>();
 
         songDAOList.removeIf(songDAO -> {
-            if (isSongDAOInvalid(songDAO) || isSongVotesInvalid(songDAO)) {
-                System.out.println(" nieprawidłowa piosenka: " + songDAO.toString() + " w pliku " + fileName);
-
-                if (!removedElements.getRemovedSongs().containsKey(fileName)) {
-                    List<SongDAO> removedSongs = new ArrayList<>();
-                    removedSongs.add(songDAO);
-                    removedElements.getRemovedSongs().put(fileName, removedSongs);
-                } else
-                    removedElements.getRemovedSongs().get(fileName).add(songDAO);
-
+            if (isSongDAOInvalid(songDAO) || isSongVotesInvalid(songDAO) || isSongCategoryInvalid(songDAO)) {
+                removedSongs.add(songDAO);
                 return true;
             }
             return false;
         });
-        return removedElements;
+
+        return removedSongs;
     }
 
     private boolean isSongDAOInvalid(SongDAO songDAO) {
@@ -39,6 +31,7 @@ public class Validator {
                         String value = (String) field.get(songDAO);
                         if (value != null) {
                             value = value.trim();
+                            field.set(songDAO, value);
                             return value.equals("");
                         }
                     } catch (IllegalAccessException ignored) {
@@ -52,5 +45,14 @@ public class Validator {
         return !Pattern.compile(regex)
                 .matcher(songDAO.votes)
                 .matches();
+    }
+
+    private boolean isSongCategoryInvalid(SongDAO songDAO) {
+        try {
+            Categories.valueOf(songDAO.category.toUpperCase());
+            return false;
+        } catch (Exception ignore) {
+        }
+        return true;
     }
 }
