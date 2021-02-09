@@ -11,7 +11,6 @@ public class FileChooser {
     private final JFileChooser fileChooser;
 
     public FileChooser() {
-
         fileChooser = new JFileChooser();
         fileChooser.addChoosableFileFilter(
                 new FileNameExtensionFilter("Obsługiwane pliki",

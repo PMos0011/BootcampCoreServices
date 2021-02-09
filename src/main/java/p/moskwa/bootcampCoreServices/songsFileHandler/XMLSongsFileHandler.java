@@ -12,7 +12,6 @@ public class XMLSongsFileHandler implements SongsFileHandler {
 
     @Override
     public List<SongDAO> readSongsFromFile(File file) {
-
         try {
             return new XmlMapper().readValue(file, SongsDAO.class).getSongs();
         } catch (IOException e) {

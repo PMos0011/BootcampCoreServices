@@ -8,7 +8,6 @@ import java.util.List;
 
 @JacksonXmlRootElement(localName = "songs")
 public class SongsDAO {
-
     @JacksonXmlProperty(localName = "song")
     @JacksonXmlElementWrapper(useWrapping = false)
     private List<SongDAO> songDAOS;

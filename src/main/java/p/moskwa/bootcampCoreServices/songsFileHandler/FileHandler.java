@@ -10,7 +10,7 @@ public class FileHandler {
     public List<SongDAO> readSongsFromFile(File file) {
         SupportedFiles extension = getExtension(file);
 
-        if (extension != null)
+        if (extension != null) {
             switch (extension) {
                 case CSV:
                     return new CSVSongsFileHandler().readSongsFromFile(file);
@@ -19,6 +19,7 @@ public class FileHandler {
                 default:
                     throw new IllegalStateException("Unexpected value: " + extension);
             }
+        }
         return null;
     }
 

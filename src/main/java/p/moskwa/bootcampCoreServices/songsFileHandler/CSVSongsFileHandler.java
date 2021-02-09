@@ -13,7 +13,6 @@ public class CSVSongsFileHandler implements SongsFileHandler {
 
     @Override
     public List<SongDAO> readSongsFromFile(File file) {
-
         try {
             MappingIterator<SongDAO> songsIterator = new CsvMapper().readerWithSchemaFor(SongDAO.class).readValues(file);
             return songsIterator.readAll()

@@ -1,7 +1,6 @@
 package p.moskwa.bootcampCoreServices.dataModel;
 
 public enum Categories {
-
     ALTERNATIVE("Alternative"),
     AMBIENT("Ambient"),
     BLUES("Blues"),
