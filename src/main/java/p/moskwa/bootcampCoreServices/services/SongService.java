@@ -6,6 +6,7 @@ import p.moskwa.bootcampCoreServices.dataModel.SongList;
 import p.moskwa.bootcampCoreServices.mappers.SongMapper;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static p.moskwa.bootcampCoreServices.dataModel.Song.UID_SPLITTER;
 
@@ -16,7 +17,7 @@ public class SongService {
         songList = new SongList();
     }
 
-    public HashMap<String, HashMap<String, List<Song>>> getSongList() {
+    public HashMap<String, HashMap<String, List<Song>>> getSortedSongList() {
         return songList.getSongListHashMap();
     }
 
@@ -78,6 +79,28 @@ public class SongService {
                 .forEach((author, songs) -> songs.forEach(song ->
                         song.setVotes(0))
                 ));
+    }
+
+    public List<Song> getSortedSongList(String category) {
+        List<Song> listToSort = getSongListFromHashMap(category);
+
+        return listToSort.stream()
+                .sorted(Comparator.comparingInt(Song::getVotes).reversed())
+                .collect(Collectors.toList());
+    }
+
+    private List<Song> getSongListFromHashMap(String category) {
+        List<Song> newSongList = new ArrayList<>();
+        if (category != null) {
+            if (songList.getSongListHashMap().containsKey(category))
+                songList.getSongListHashMap().get(category)
+                        .forEach((author, list) -> newSongList.addAll(list));
+
+        } else
+            songList.getSongListHashMap().forEach((cat, authors) -> authors
+                    .forEach((author, list) -> newSongList.addAll(list)));
+
+        return newSongList;
     }
 
     private void addNewCategoryToList(HashMap<String, HashMap<String, List<Song>>> songListHashMap, Song newSong) {

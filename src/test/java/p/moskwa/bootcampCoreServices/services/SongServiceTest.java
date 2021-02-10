@@ -49,7 +49,7 @@ class SongServiceTest {
     @Test
     void updateSongListOneFile() {
         songService.updateSongList(songsFromFile1);
-        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSongList();
+        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSortedSongList();
         List<Song> auth1SongsSet = songListMap.get(Categories.RAP.name()).get("auth1");
         List<Song> auth3SongsSet = songListMap.get(Categories.REGGAE.name()).get("auth3");
 
@@ -65,7 +65,7 @@ class SongServiceTest {
         songService.updateSongList(songsFromFile1);
         songService.updateSongList(songsFromFile2);
 
-        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSongList();
+        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSortedSongList();
         List<Song> auth1SongsSet = songListMap.get(Categories.RAP.name()).get("auth1");
 
         assertEquals(3, songListMap.size());
@@ -76,14 +76,31 @@ class SongServiceTest {
     @Test
     void getSongFromUid() {
         songService.updateSongList(songsFromFile2);
-        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSongList();
+        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSortedSongList();
 
         String songUid = SongMapper.INSTANCE.songDAOToSong(songToUidTest).getUid();
         Song songFromUid = songService.getSongFromUid(songUid);
         Song songFromList = songListMap.get(Categories.DOWNTEMPO.name()).get("auth5").get(0);
+
         assertEquals(songFromList.getTitle(), songFromUid.getTitle());
         assertEquals(songFromList.getAuthor(), songFromUid.getAuthor());
         assertEquals(songFromList.getAlbum(), songFromUid.getAlbum());
         assertEquals(songFromList.getCategory().name(), songFromUid.getCategory().name());
+    }
+
+    @Test
+    void getSortedSongListAllCategory(){
+        songService.updateSongList(songsFromFile1);
+
+        List<Song> sortedList = songService.getSortedSongList(null);
+        assertEquals(5,sortedList.size());
+    }
+
+    @Test
+    void getSortedSongListOneCategory(){
+        songService.updateSongList(songsFromFile1);
+
+        List<Song> sortedList = songService.getSortedSongList(Categories.REGGAE.name());
+        assertEquals(1,sortedList.size());
     }
 }

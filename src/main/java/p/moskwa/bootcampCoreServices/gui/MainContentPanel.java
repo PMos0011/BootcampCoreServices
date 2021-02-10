@@ -11,7 +11,7 @@ import java.util.List;
 
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
-public class MainContentPanel extends InterfaceClear{
+public class MainContentPanel extends InterfaceClear {
     private final JPanel content;
     private final MainContentService mainContentService;
 
@@ -50,7 +50,7 @@ public class MainContentPanel extends InterfaceClear{
     public void displaySongs(HashMap<String, HashMap<String, List<Song>>> songList) {
         clearView(content);
 
-        if (songList.keySet().size() < 1) {
+        if (songList.size() < 1) {
             content.add(new JLabel("Wygląda nia to że nie mam nic do wyświetlenia"));
         } else {
             JPanel songPanel = new JPanel();
@@ -64,6 +64,31 @@ public class MainContentPanel extends InterfaceClear{
             jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             content.add(jScrollPane);
             getMainWindowInstance().getSideBar().displaySongDetails(null);
+        }
+        getMainWindowInstance().revalidate();
+    }
+
+    public void displayReport(HashMap<Integer, List<Song>> reportList) {
+        clearView(content);
+        if (reportList.size() < 1) {
+            content.add(new JLabel("Wygląda nia to że nie mam nic do wyświetlenia"));
+        } else {
+            JPanel reportPanel = new JPanel();
+            reportPanel.setLayout(new GridLayout(0, 4));
+            reportPanel.add(new JLabel("Miejsce"));
+            reportPanel.add(new JLabel("Autor"));
+            reportPanel.add(new JLabel("Tytuł"));
+            reportPanel.add(new JLabel("Głosy"));
+            reportList.forEach((place, songs) -> songs.forEach(song -> {
+                        reportPanel.add(new JLabel(place.toString()));
+                        reportPanel.add((new JLabel(song.getAuthor())));
+                        reportPanel.add((new JLabel(song.getTitle())));
+                        reportPanel.add(new JLabel(song.getVotes().toString()));
+                    })
+            );
+            JScrollPane jScrollPane = new JScrollPane(reportPanel);
+            jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            content.add(jScrollPane);
         }
         getMainWindowInstance().revalidate();
     }

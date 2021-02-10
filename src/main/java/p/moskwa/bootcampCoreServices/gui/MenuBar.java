@@ -2,6 +2,7 @@ package p.moskwa.bootcampCoreServices.gui;
 
 import p.moskwa.bootcampCoreServices.dataModel.Categories;
 import p.moskwa.bootcampCoreServices.gui.services.FileMenuServices;
+import p.moskwa.bootcampCoreServices.gui.services.ReportMenuServices;
 import p.moskwa.bootcampCoreServices.gui.services.SongMenuServices;
 
 import javax.swing.*;
@@ -10,10 +11,12 @@ public class MenuBar extends FileChooser {
     private final JMenuBar menu;
     private final FileMenuServices fileMenuServices;
     private final SongMenuServices songMenuServices;
+    private final ReportMenuServices reportMenuServices;
 
     public MenuBar() {
         fileMenuServices = new FileMenuServices();
         songMenuServices = new SongMenuServices();
+        reportMenuServices = new ReportMenuServices();
         menu = menuConstructor();
     }
 
@@ -64,17 +67,34 @@ public class MenuBar extends FileChooser {
     private JMenu reportMenuConstructor() {
         JMenu reportMenu = new JMenu("Raporty");
 
-        JMenuItem allSongsReport = new JMenuItem("Wszystkie piosenki");
-        JMenu categoryReport = new JMenu("Raport kategorii");
+        JRadioButton top3RadioB = new JRadioButton("Top 3");
+        top3RadioB.setActionCommand("3");
+        top3RadioB.setSelected(true);
+        JRadioButton top10RadioB = new JRadioButton("Top 10");
+        top10RadioB.setActionCommand("10");
+        JRadioButton allRadioB = new JRadioButton("Pełen ranking");
 
+        ButtonGroup reportButtonsGroup = new ButtonGroup();
+        reportButtonsGroup.add(top3RadioB);
+        reportButtonsGroup.add(top10RadioB);
+        reportButtonsGroup.add(allRadioB);
+
+        reportMenu.add(top3RadioB);
+        reportMenu.add(top10RadioB);
+        reportMenu.add(allRadioB);
+        reportMenu.add(new JSeparator());
+
+        JMenuItem allSongsReport = new JMenuItem("Wszystkie piosenki");
+        allSongsReport.addActionListener(action -> reportMenuServices.createReport(action, reportButtonsGroup));
+        JMenu categoryReport = new JMenu("Raport kategorii");
         for (Categories category : Categories.values()) {
             JMenuItem categoryItem = new JMenuItem(category.getCategory());
             categoryItem.setName(category.name());
+            categoryItem.addActionListener(action -> reportMenuServices.createReport(action, reportButtonsGroup));
             categoryReport.add(categoryItem);
         }
 
         reportMenu.add(allSongsReport);
-        reportMenu.add(categoryReport);
         reportMenu.add(categoryReport);
 
         return reportMenu;
