@@ -44,6 +44,5 @@ public class MainContentService implements MouseListener {
     public void mouseExited(MouseEvent mouseEvent) {
         if (mouseEvent.getComponent() != selectedLabel)
             mouseEvent.getComponent().setBackground(Color.WHITE);
-
     }
 }

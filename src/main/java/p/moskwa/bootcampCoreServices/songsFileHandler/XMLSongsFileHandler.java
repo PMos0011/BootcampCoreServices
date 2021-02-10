@@ -14,8 +14,7 @@ public class XMLSongsFileHandler implements SongsFileHandler {
     public List<SongDAO> readSongsFromFile(File file) {
         try {
             return new XmlMapper().readValue(file, SongsDAO.class).getSongs();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
         return null;
     }

@@ -22,7 +22,7 @@ public class SideBarServices {
     private final String TITLE = "Dodaj piosenkę";
     private final String WARNING = "Coś jest nie tak z Twoją piosenką. Nie dodam!";
     private final String INFO = "Piosenka dodana! Jak nie wierzysz, sprawdź na liście.";
-    private final String CONFIRM = "Piosenka jest już na liście ale jak chcesz zsumować dodać głosy.";
+    private final String CONFIRM = "Piosenka jest już na liście ale jak chcesz to mogę zsumować głosy.";
 
     public void addVoice(Song song, SideBar sideBar) {
         getMainWindowInstance().getSongService().addVoicesToSong(song, 1);

@@ -1,13 +1,10 @@
 package p.moskwa.bootcampCoreServices.gui;
 
-import p.moskwa.bootcampCoreServices.dataModel.Song;
 import p.moskwa.bootcampCoreServices.services.RemovedSongsServices;
 import p.moskwa.bootcampCoreServices.services.SongService;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.List;
-
 
 public class MainWindow extends JFrame {
 
@@ -71,7 +68,6 @@ public class MainWindow extends JFrame {
 
     public void displaySongDetails(String songUid) {
         sideBar.displaySongDetails(
-                songService.getSongFromUid(songUid)
-        );
+                songService.getSongFromUid(songUid));
     }
 }

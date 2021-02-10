@@ -31,7 +31,7 @@ public class SideBar extends InterfaceClear {
     public void displayErrorConfirmButton() {
         clearView(sideBar);
 
-        JButton confirmErrorButton = new JButton("przeczytałem błędy");
+        JButton confirmErrorButton = new JButton("ok, mam to");
         confirmErrorButton.addActionListener(action -> getMainWindowInstance().displaySongs());
         sideBar.add(confirmErrorButton);
     }
@@ -60,6 +60,10 @@ public class SideBar extends InterfaceClear {
             sideBar.add(songDetails);
         }
         getMainWindowInstance().revalidate();
+    }
+
+    public void clearSidebar(){
+        clearView(sideBar);
     }
 
     public void displayNewSongForm() {

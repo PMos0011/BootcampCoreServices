@@ -10,6 +10,10 @@ public class SongMenuServices {
 
     public void resetAllSongsVotes(){
         getMainWindowInstance().getSongService().resetAllSongVotes();
+        showAllSongs();
+    }
+
+    public void showAllSongs(){
         getMainWindowInstance().displaySongs();
     }
 }

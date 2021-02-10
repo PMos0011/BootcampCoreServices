@@ -22,8 +22,4 @@ public class RankedSongList {
     public List<Song> getSongList() {
         return songList;
     }
-
-    public void setSongList(List<Song> songList) {
-        this.songList = songList;
-    }
 }

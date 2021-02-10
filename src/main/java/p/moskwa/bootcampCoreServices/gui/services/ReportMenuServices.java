@@ -21,6 +21,7 @@ public class ReportMenuServices {
 
         List<Song> sortedSongList = getMainWindowInstance().getSongService().getSortedSongList(jMenuItem.getName());
         List<RankedSongList> rankingList = createRankingList(sortedSongList, iterationCount);
+        getMainWindowInstance().getSideBar().clearSidebar();
         getMainWindowInstance().getMainContentPanel().displayReport(rankingList);
     }
 

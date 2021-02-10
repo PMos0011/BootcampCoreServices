@@ -24,8 +24,7 @@ public class CSVSongsFileHandler implements SongsFileHandler {
                     .readValues(file);
 
             return new ArrayList<>(songsIterator.readAll());
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException ignored) {
         }
         return null;
     }

@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
@@ -22,7 +23,7 @@ public class MainContentPanel extends InterfaceClear {
         content = new JPanel();
         content.setLayout(new FlowLayout(FlowLayout.LEFT));
         content.add(new JLabel("Nie mam jeszcze nic do wyświetlenia - "));
-        content.add(new JLabel("wczytaj dane"));
+        content.add(new JLabel("załaduj może jakiś plik"));
 
         mainContentService = new MainContentService();
     }
@@ -36,15 +37,22 @@ public class MainContentPanel extends InterfaceClear {
 
         JPanel errorContent = new JPanel();
         errorContent.setLayout(new GridLayout(0, 1));
+        AtomicReference<Integer> heightCounter = new AtomicReference<>(0);
+
         removedSongs.forEach((fileName, songs) -> {
             errorContent.add(new JLabel("W pliku:"));
             errorContent.add(new JLabel(fileName));
-            errorContent.add(new JLabel("ignoruje:"));
-            songs
-                    .forEach(value -> errorContent.add(new JLabel(value.toString())));
+            errorContent.add(new JLabel("ignoruje z powodu błędów:"));
+            heightCounter.updateAndGet(v -> v + 60);
+
+            songs.forEach(value -> {
+                errorContent.add(new JLabel(value.toString()));
+                heightCounter.updateAndGet(v -> v + 20);
+            });
             errorContent.add(new JLabel(""));
+            heightCounter.updateAndGet(v -> v + 20);
         });
-        JScrollPane jScrollPane = new JScrollPane(errorContent);
+        JScrollPane jScrollPane = createJScrollPane(errorContent, heightCounter.get());
         content.add(jScrollPane);
         getMainWindowInstance().getSideBar().displayErrorConfirmButton();
         getMainWindowInstance().revalidate();
@@ -54,17 +62,21 @@ public class MainContentPanel extends InterfaceClear {
         clearView(content);
 
         if (songList.size() < 1) {
-            content.add(new JLabel(TABULATOR + "Wygląda nia to że nie mam nic do wyświetlenia"));
+            content.add(new JLabel(TABULATOR + "Wygląda na to że nie mam nic do wyświetlenia. No cóż, może następnym razem coś będzie."));
         } else {
             JPanel songPanel = new JPanel();
             songPanel.setLayout(new GridLayout(0, 1));
+            AtomicReference<Integer> heightCounter = new AtomicReference<>(20);
+
             songPanel.add(new JLabel(TABULATOR + "Piosenki:"));
             songList.forEach((category, authors) -> authors
-                    .forEach((author, songs) -> songs.forEach(song ->
-                            songPanel.add(createSongLabel(song))
+                    .forEach((author, songs) -> songs.forEach(song -> {
+                                songPanel.add(createSongLabel(song));
+                                heightCounter.updateAndGet(v -> v + 21);
+                            }
                     )));
-            JScrollPane jScrollPane = new JScrollPane(songPanel);
-            jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+            JScrollPane jScrollPane = createJScrollPane(songPanel, heightCounter.get());
             content.add(jScrollPane);
             getMainWindowInstance().getSideBar().displaySongDetails(null);
         }
@@ -74,35 +86,52 @@ public class MainContentPanel extends InterfaceClear {
     public void displayReport(List<RankedSongList> rankingList) {
         clearView(content);
         if (rankingList.size() < 1) {
-            content.add(new JLabel(TABULATOR + "Wygląda nia to że nie mam nic do wyświetlenia"));
+            content.add(new JLabel(TABULATOR + "Wygląda na to że nie mam nic do wyświetlenia. No cóż, może następnym razem coś będzie."));
         } else {
             JPanel reportPanel = new JPanel();
             reportPanel.setLayout(new GridLayout(0, 4));
+            AtomicReference<Integer> heightCounter = new AtomicReference<>(20);
+
             reportPanel.add(new JLabel("Miejsce"));
             reportPanel.add(new JLabel("Autor"));
             reportPanel.add(new JLabel(TABULATOR + "Tytuł"));
             reportPanel.add(new JLabel(TABULATOR + "Głosy"));
-            
+
             rankingList.forEach(list ->
                     list.getSongList().forEach(song -> {
                         reportPanel.add(new JLabel(String.valueOf(list.getPlace())));
                         reportPanel.add((new JLabel(song.getAuthor())));
                         reportPanel.add((new JLabel(TABULATOR + song.getTitle())));
                         reportPanel.add(new JLabel(TABULATOR + song.getVotes().toString()));
+                        heightCounter.updateAndGet(v -> v + 20);
                     }));
 
-            JScrollPane jScrollPane = new JScrollPane(reportPanel);
-            jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            JScrollPane jScrollPane = createJScrollPane(reportPanel, heightCounter.get());
             content.add(jScrollPane);
         }
         getMainWindowInstance().revalidate();
     }
 
+    private JScrollPane createJScrollPane(JPanel panel, int height) {
+        JScrollPane jScrollPane = new JScrollPane(panel);
+
+        if (height > 700)
+            height = 700;
+
+        jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane.getVerticalScrollBar().setUnitIncrement(10);
+        jScrollPane.setPreferredSize(new Dimension(1000, height));
+
+        return jScrollPane;
+    }
+
     private JLabel createSongLabel(Song song) {
-        JLabel songLabel = new JLabel(TABULATOR + song.toString() + TABULATOR);
-        songLabel.setName(song.getUid());
-        songLabel.addMouseListener(mainContentService);
-        songLabel.setOpaque(true);
-        return songLabel;
+        JLabel label = new JLabel(TABULATOR + song.toString() + TABULATOR);
+        label.setName(song.getUid());
+        label.addMouseListener(mainContentService);
+        label.setOpaque(true);
+        label.setBackground(Color.WHITE);
+        label.setPreferredSize(new Dimension(990, 20));
+        return label;
     }
 }

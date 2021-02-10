@@ -60,6 +60,9 @@ public class MenuBar extends FileChooser {
         JMenuItem resetVotes = new JMenuItem("Wyzeruj głosy");
         resetVotes.addActionListener(action -> songMenuServices.resetAllSongsVotes());
         songMenu.add(resetVotes);
+        JMenuItem showSongs = new JMenuItem("Wyświetl piosenki");
+        showSongs.addActionListener(action -> songMenuServices.showAllSongs());
+        songMenu.add(showSongs);
 
         return songMenu;
     }
