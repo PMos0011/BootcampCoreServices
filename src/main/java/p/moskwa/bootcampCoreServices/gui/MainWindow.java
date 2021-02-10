@@ -35,7 +35,7 @@ public class MainWindow extends JFrame {
         mainWindow = this;
     }
 
-    public static MainWindow getMainWindow() {
+    public static MainWindow getMainWindowInstance() {
         return mainWindow;
     }
 

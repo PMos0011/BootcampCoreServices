@@ -2,16 +2,16 @@ package p.moskwa.bootcampCoreServices.gui;
 
 import p.moskwa.bootcampCoreServices.dataModel.Song;
 import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
-import p.moskwa.bootcampCoreServices.services.MainContentService;
+import p.moskwa.bootcampCoreServices.gui.services.MainContentService;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 
-import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindow;
+import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
-public class MainContentPanel{
+public class MainContentPanel extends InterfaceClear{
     private final JPanel content;
     private final MainContentService mainContentService;
 
@@ -29,8 +29,8 @@ public class MainContentPanel{
     }
 
     public void displayInvalidSongs(HashMap<String, List<SongDAO>> removedSongs) {
-        content.removeAll();
-        content.repaint();
+        clearView(content);
+
         JPanel errorContent = new JPanel();
         errorContent.setLayout(new GridLayout(0, 1));
         removedSongs.forEach((fileName, songs) -> {
@@ -43,13 +43,13 @@ public class MainContentPanel{
         });
         JScrollPane jScrollPane = new JScrollPane(errorContent);
         content.add(jScrollPane);
-        getMainWindow().getSideBar().displayErrorConfirmButton();
-        getMainWindow().revalidate();
+        getMainWindowInstance().getSideBar().displayErrorConfirmButton();
+        getMainWindowInstance().revalidate();
     }
 
     public void displaySongs(HashMap<String, HashMap<String, List<Song>>> songList) {
-        content.removeAll();
-        content.repaint();
+        clearView(content);
+
         if (songList.keySet().size() < 1) {
             content.add(new JLabel("Wygląda nia to że nie mam nic do wyświetlenia"));
         } else {
@@ -63,9 +63,9 @@ public class MainContentPanel{
             JScrollPane jScrollPane = new JScrollPane(songPanel);
             jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             content.add(jScrollPane);
-            getMainWindow().getSideBar().displaySongDetails(null);
+            getMainWindowInstance().getSideBar().displaySongDetails(null);
         }
-        getMainWindow().revalidate();
+        getMainWindowInstance().revalidate();
     }
 
     private JLabel createSongLabel(Song song) {

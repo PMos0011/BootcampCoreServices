@@ -7,7 +7,7 @@ import p.moskwa.bootcampCoreServices.validator.Validator;
 import java.io.File;
 import java.util.List;
 
-import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindow;
+import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
 public class SongDAOServices {
 
@@ -22,7 +22,7 @@ public class SongDAOServices {
     public void handleSongListFromFile(File file) {
         List<SongDAO> songDAOList = fileHandler.readSongsFromFile(file);
         List<SongDAO> removedSongList = validator.validateSongDAOList(songDAOList);
-        getMainWindow().getRemoveSongsServices().updateRemovedSongsList(removedSongList,file.getPath());
-        getMainWindow().getSongService().updateSongListAndRefreshView(songDAOList);
+        getMainWindowInstance().getRemoveSongsServices().updateRemovedSongsList(removedSongList,file.getPath());
+        getMainWindowInstance().getSongService().updateSongList(songDAOList);
     }
 }

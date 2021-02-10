@@ -1,6 +1,7 @@
-package p.moskwa.bootcampCoreServices.services;
+package p.moskwa.bootcampCoreServices.gui.services;
 
 import org.jetbrains.annotations.NotNull;
+import p.moskwa.bootcampCoreServices.services.SongDAOServices;
 
 import javax.swing.*;
 import java.io.File;
@@ -9,22 +10,23 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindow;
+import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
 public class FileMenuServices {
-private final SongDAOServices songDAOServices;
+    private final SongDAOServices songDAOServices;
 
     public FileMenuServices() {
-       songDAOServices = new SongDAOServices();
+        songDAOServices = new SongDAOServices();
     }
 
     public void openFileAction(JFileChooser fileChooser) {
         fileChooser.setDialogTitle("Wybierz plik");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            getMainWindow().getRemoveSongsServices().clearList();
+            getMainWindowInstance().getRemoveSongsServices().clearList();
             File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
             songDAOServices.handleSongListFromFile(file);
+            getMainWindowInstance().updateMainContent();
         }
     }
 
@@ -32,10 +34,11 @@ private final SongDAOServices songDAOServices;
         fileChooser.setDialogTitle("Wybierz folder");
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         if (fileChooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-            getMainWindow().getRemoveSongsServices().clearList();
+            getMainWindowInstance().getRemoveSongsServices().clearList();
             File directory = new File(fileChooser.getSelectedFile().getAbsolutePath());
             Set<File> files = getAllFilesFromSelectedDirectory(directory);
             files.forEach(songDAOServices::handleSongListFromFile);
+            getMainWindowInstance().updateMainContent();
         }
     }
 

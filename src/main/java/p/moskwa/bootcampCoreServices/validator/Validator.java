@@ -24,7 +24,7 @@ public class Validator {
         return removedSongs;
     }
 
-    private boolean isSongDAOInvalid(SongDAO songDAO) {
+    public boolean isSongDAOInvalid(SongDAO songDAO) {
         return Arrays.stream(songDAO.getClass().getFields())
                 .anyMatch(field -> {
                     try {
@@ -40,7 +40,7 @@ public class Validator {
                 });
     }
 
-    private boolean isSongVotesInvalid(SongDAO songDAO) {
+    public boolean isSongVotesInvalid(SongDAO songDAO) {
         String regex = "[0-9]+";
         return !Pattern.compile(regex)
                 .matcher(songDAO.votes)

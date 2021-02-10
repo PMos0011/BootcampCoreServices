@@ -1,19 +1,19 @@
 package p.moskwa.bootcampCoreServices.gui;
 
 import p.moskwa.bootcampCoreServices.dataModel.Categories;
-import p.moskwa.bootcampCoreServices.services.FileMenuServices;
+import p.moskwa.bootcampCoreServices.gui.services.FileMenuServices;
+import p.moskwa.bootcampCoreServices.gui.services.SongMenuServices;
 
 import javax.swing.*;
 
-public class MenuBar {
+public class MenuBar extends FileChooser {
     private final JMenuBar menu;
-    private final FileChooser fileChooser;
     private final FileMenuServices fileMenuServices;
+    private final SongMenuServices songMenuServices;
 
     public MenuBar() {
-        fileChooser = new FileChooser();
         fileMenuServices = new FileMenuServices();
-
+        songMenuServices = new SongMenuServices();
         menu = menuConstructor();
     }
 
@@ -32,10 +32,10 @@ public class MenuBar {
 
     private JMenu fileMenuConstructor() {
         JMenuItem openFile = new JMenuItem("Otwórz plik");
-        openFile.addActionListener(action -> fileMenuServices.openFileAction(fileChooser.getFileChooser()));
+        openFile.addActionListener(action -> fileMenuServices.openFileAction(getFileChooser()));
 
         JMenuItem openDirectory = new JMenuItem("Otwórz folder");
-        openDirectory.addActionListener(action -> fileMenuServices.openDirectoryAction(fileChooser.getFileChooser()));
+        openDirectory.addActionListener(action -> fileMenuServices.openDirectoryAction(getFileChooser()));
 
         JMenuItem exit = new JMenuItem("Zamknij");
         exit.addActionListener(action -> fileMenuServices.exitApplication());
@@ -48,18 +48,20 @@ public class MenuBar {
         return fileMenu;
     }
 
-    private JMenu songMenuConstructor(){
+    private JMenu songMenuConstructor() {
         JMenu songMenu = new JMenu("Piosenki");
 
         JMenuItem addSong = new JMenuItem("Dodaj piosenkę");
+        addSong.addActionListener(action -> songMenuServices.displayAddNewSongForm());
         songMenu.add(addSong);
-        JMenuItem clearVotes = new JMenuItem("Wyzeruj głosy");
-        songMenu.add(clearVotes);
+        JMenuItem resetVotes = new JMenuItem("Wyzeruj głosy");
+        resetVotes.addActionListener(action -> songMenuServices.resetAllSongsVotes());
+        songMenu.add(resetVotes);
 
         return songMenu;
     }
 
-    private JMenu reportMenuConstructor(){
+    private JMenu reportMenuConstructor() {
         JMenu reportMenu = new JMenu("Raporty");
 
         JMenuItem allSongsReport = new JMenuItem("Wszystkie piosenki");
@@ -72,6 +74,7 @@ public class MenuBar {
         }
 
         reportMenu.add(allSongsReport);
+        reportMenu.add(categoryReport);
         reportMenu.add(categoryReport);
 
         return reportMenu;

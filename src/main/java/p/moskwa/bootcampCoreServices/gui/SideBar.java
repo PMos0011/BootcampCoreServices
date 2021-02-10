@@ -1,14 +1,18 @@
 package p.moskwa.bootcampCoreServices.gui;
 
+import p.moskwa.bootcampCoreServices.dataModel.Categories;
 import p.moskwa.bootcampCoreServices.dataModel.Song;
-import p.moskwa.bootcampCoreServices.services.SideBarServices;
+import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
+import p.moskwa.bootcampCoreServices.gui.services.SideBarServices;
 
 import javax.swing.*;
 import java.awt.*;
+import java.lang.reflect.Field;
 
-import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindow;
+import static p.moskwa.bootcampCoreServices.dataModel.TranslateSongFieldsName.translateFieldNameToPl;
+import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
-public class SideBar {
+public class SideBar extends InterfaceClear {
     private final JPanel sideBar;
     private final SideBarServices sideBarServices;
 
@@ -25,16 +29,16 @@ public class SideBar {
     }
 
     public void displayErrorConfirmButton() {
-        sideBar.removeAll();
-        sideBar.repaint();
+        clearView(sideBar);
+
         JButton confirmErrorButton = new JButton("przeczytałem błędy");
-        confirmErrorButton.addActionListener(action -> getMainWindow().displaySongs());
+        confirmErrorButton.addActionListener(action -> getMainWindowInstance().displaySongs());
         sideBar.add(confirmErrorButton);
     }
 
     public void displaySongDetails(Song song) {
-        sideBar.removeAll();
-        sideBar.repaint();
+        clearView(sideBar);
+
         if (song != null) {
             JPanel songDetails = new JPanel();
             songDetails.setBackground(Color.LIGHT_GRAY);
@@ -47,14 +51,45 @@ public class SideBar {
             songDetails.add(new JLabel("głosy: " + song.getVotes()));
 
             JButton addVoice = new JButton("Zagłosuj");
-            addVoice.addActionListener(action -> sideBarServices.addVoice(song,this));
+            addVoice.addActionListener(action -> sideBarServices.addVoice(song, this));
             songDetails.add(addVoice);
             JButton resetVotes = new JButton("Wyzeruj głosy");
-            resetVotes.addActionListener(action -> sideBarServices.resetVotes(song,this));
+            resetVotes.addActionListener(action -> sideBarServices.resetVotes(song, this));
             songDetails.add(resetVotes);
 
             sideBar.add(songDetails);
         }
-        getMainWindow().revalidate();
+        getMainWindowInstance().revalidate();
+    }
+
+    public void displayNewSongForm() {
+        clearView(sideBar);
+
+        JPanel newSongForm = new JPanel();
+        newSongForm.setBackground(Color.LIGHT_GRAY);
+        newSongForm.setLayout(new GridLayout(0, 1));
+        newSongForm.setPreferredSize(new Dimension(250, 350));
+        newSongForm.add(new JLabel("Dodaj piosenkę"));
+
+        for (Field field : SongDAO.class.getFields()) {
+            JComponent jField;
+            JLabel jLabel = new JLabel(translateFieldNameToPl(field.getName()));
+
+            if (field.getName().equals("category"))
+                jField = new JComboBox(Categories.values());
+            else
+                jField = new JFormattedTextField();
+
+            jField.setName(field.getName());
+            newSongForm.add(jLabel);
+            newSongForm.add(jField);
+        }
+
+        JButton addButton = new JButton("Dodaj");
+        addButton.addActionListener(action -> sideBarServices.addSongToList(newSongForm));
+        newSongForm.add(addButton);
+
+        sideBar.add(newSongForm);
+        getMainWindowInstance().revalidate();
     }
 }

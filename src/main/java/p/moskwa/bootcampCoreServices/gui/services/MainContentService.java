@@ -1,11 +1,11 @@
-package p.moskwa.bootcampCoreServices.services;
+package p.moskwa.bootcampCoreServices.gui.services;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindow;
+import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
 public class MainContentService implements MouseListener {
     private JLabel selectedLabel;
@@ -23,7 +23,7 @@ public class MainContentService implements MouseListener {
             selectedLabel.setBackground(Color.WHITE);
 
         selectedLabel = label;
-        getMainWindow().displaySongDetails(label.getName());
+        getMainWindowInstance().displaySongDetails(label.getName());
     }
 
     @Override
