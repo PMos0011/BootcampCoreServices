@@ -4,6 +4,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import p.moskwa.bootcampCoreServices.dataModel.Categories;
+import p.moskwa.bootcampCoreServices.dataModel.RankedSongList;
 import p.moskwa.bootcampCoreServices.dataModel.Song;
 import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
 import p.moskwa.bootcampCoreServices.services.SongService;
@@ -62,7 +63,7 @@ class ReportMenuServicesTest {
     void createReportOneFileTop3() {
         songService.updateSongList(songsFromFile1);
         List<Song> sortedList = songService.getSortedSongList(Categories.RAP.name());
-        HashMap<Integer, List<Song>> rankingList = reportMenuServices.createRankingList(sortedList, 3);
+        List<RankedSongList> rankingList = reportMenuServices.createRankingList(sortedList, 3);
 
         assertEquals(3, rankingList.size());
     }
@@ -71,11 +72,11 @@ class ReportMenuServicesTest {
     void createReportOneFileTop3ExAequo() {
         songService.updateSongList(songsFromFile3);
         List<Song> sortedList = songService.getSortedSongList(Categories.ELECTRONIC.name());
-        HashMap<Integer, List<Song>> rankingList = reportMenuServices.createRankingList(sortedList, 3);
+        List<RankedSongList> rankingList = reportMenuServices.createRankingList(sortedList, 3);
 
         assertEquals(2, rankingList.size());
-        assertEquals(2, rankingList.get(1).size());
-        assertFalse(rankingList.containsKey(2));
+        assertEquals(2, rankingList.get(0).getSongList().size());
+        assertNull(rankingList.stream().filter(list -> list.getPlace() == 2).findAny().orElse(null));
     }
 
     @Test
@@ -85,24 +86,24 @@ class ReportMenuServicesTest {
         songService.updateSongList(songsFromFile3);
 
         List<Song> sortedList = songService.getSortedSongList(null);
-        HashMap<Integer, List<Song>> rankingList = reportMenuServices.createRankingList(sortedList, 0);
+        List<RankedSongList> rankingList = reportMenuServices.createRankingList(sortedList, 0);
 
         assertEquals(10, rankingList.size());
-        assertEquals(2, rankingList.get(1).size());
-        assertEquals(3, rankingList.get(15).size());
-        assertEquals("r_auth2", rankingList.get(1).stream()
+        assertEquals(2, rankingList.get(0).getSongList().size());
+        assertEquals(3, rankingList.get(rankingList.size()-1).getSongList().size());
+        assertEquals("r_auth2", rankingList.get(0).getSongList().stream()
                 .filter(song -> song.getAuthor()
                         .equals("r_auth2"))
                 .findFirst()
                 .get()
                 .getAuthor());
-        assertEquals("d_auth1", rankingList.get(1).stream()
+        assertEquals("d_auth1", rankingList.get(0).getSongList().stream()
                 .filter(song -> song.getAuthor()
                         .equals("d_auth1"))
                 .findFirst()
                 .get()
                 .getAuthor());
-        assertFalse(rankingList.containsKey(2));
-        assertFalse(rankingList.containsKey(6));
+        assertNull(rankingList.stream().filter(list -> list.getPlace() == 2).findAny().orElse(null));
+        assertNull(rankingList.stream().filter(list -> list.getPlace() == 6).findAny().orElse(null));
     }
 }

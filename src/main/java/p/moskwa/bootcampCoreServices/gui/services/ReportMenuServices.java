@@ -1,5 +1,6 @@
 package p.moskwa.bootcampCoreServices.gui.services;
 
+import p.moskwa.bootcampCoreServices.dataModel.RankedSongList;
 import p.moskwa.bootcampCoreServices.dataModel.Song;
 
 import javax.swing.*;
@@ -19,15 +20,14 @@ public class ReportMenuServices {
             iterationCount = Integer.parseInt(radioButton.getActionCommand());
 
         List<Song> sortedSongList = getMainWindowInstance().getSongService().getSortedSongList(jMenuItem.getName());
-        HashMap<Integer, List<Song>> rankingList = createRankingList(sortedSongList, iterationCount);
-
+        List<RankedSongList> rankingList = createRankingList(sortedSongList, iterationCount);
         getMainWindowInstance().getMainContentPanel().displayReport(rankingList);
     }
 
-    public HashMap<Integer, List<Song>> createRankingList(List<Song> sortedSongList, int iterationCount) {
-        HashMap<Integer, List<Song>> rankingList = new HashMap<>();
+    public List<RankedSongList> createRankingList(List<Song> sortedSongList, int iterationCount) {
+        List<RankedSongList> rankingList = new ArrayList<>();
         int songCounter = 1;
-        int rankingPlace = 1;
+        int rankingPlace;
         Song previewSong = new Song();
 
         ListIterator<Song> songIterator = sortedSongList.listIterator();
@@ -35,15 +35,16 @@ public class ReportMenuServices {
         while (songIterator.hasNext()) {
             Song currentSong = songIterator.next();
             if (songIterator.previousIndex() > 0 && previewSong.getVotes().equals(currentSong.getVotes())) {
-                rankingList.get(rankingPlace).add(currentSong);
+                rankingList.get(rankingList.size() - 1).getSongList().add(currentSong);
             } else {
                 rankingPlace = songCounter;
                 if (iterationCount != 0 && rankingPlace > iterationCount)
                     break;
 
-                rankingList.put(rankingPlace, new ArrayList<>() {{
-                    add(currentSong);
-                }});
+                RankedSongList newRankedList = new RankedSongList();
+                newRankedList.setPlace(rankingPlace);
+                newRankedList.getSongList().add(currentSong);
+                rankingList.add(newRankedList);
             }
             previewSong = currentSong;
             songCounter++;
