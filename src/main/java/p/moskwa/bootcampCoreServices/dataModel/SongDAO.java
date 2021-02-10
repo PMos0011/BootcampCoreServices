@@ -1,8 +1,5 @@
 package p.moskwa.bootcampCoreServices.dataModel;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
-@JsonPropertyOrder({"title", "author", "album", "category", "votes"})
 public class SongDAO {
     public String title;
     public String author;
