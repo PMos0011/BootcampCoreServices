@@ -1,5 +1,8 @@
 package p.moskwa.bootcampCoreServices.dataModel;
 
+/**
+ * Represent unverified song
+ */
 public class SongDAO {
     public String title;
     public String author;

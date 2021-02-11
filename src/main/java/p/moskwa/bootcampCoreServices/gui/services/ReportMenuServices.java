@@ -19,7 +19,7 @@ public class ReportMenuServices {
         if (radioButton.getActionCommand() != null)
             iterationCount = Integer.parseInt(radioButton.getActionCommand());
 
-        List<Song> sortedSongList = getMainWindowInstance().getSongService().getSortedSongList(jMenuItem.getName());
+        List<Song> sortedSongList = getMainWindowInstance().getSongService().getGroupedSongList(jMenuItem.getName());
         List<RankedSongList> rankingList = createRankingList(sortedSongList, iterationCount);
         getMainWindowInstance().getSideBar().clearSidebar();
         getMainWindowInstance().getMainContentPanel().displayReport(rankingList);

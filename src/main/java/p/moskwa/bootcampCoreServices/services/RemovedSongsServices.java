@@ -1,6 +1,5 @@
 package p.moskwa.bootcampCoreServices.services;
 
-import p.moskwa.bootcampCoreServices.dataModel.RemovedSongList;
 import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
 
 import java.util.HashMap;
@@ -8,26 +7,22 @@ import java.util.List;
 
 public class RemovedSongsServices {
 
-    private final RemovedSongList removedSongList;
-
-    public RemovedSongsServices() {
-        removedSongList = new RemovedSongList();
-    }
+    private HashMap<String, List<SongDAO>> removedSongs;
 
     public void updateRemovedSongsList(List<SongDAO> removedSongsList, String fileName) {
         if (removedSongsList.size() > 0)
-            removedSongList.getRemovedSongs().put(fileName, removedSongsList);
+            removedSongs.put(fileName, removedSongsList);
     }
 
     public void clearList() {
-        removedSongList.setRemovedSongs(new HashMap<>());
+        removedSongs = new HashMap<>();
     }
 
     public boolean isErrorToDisplay() {
-        return removedSongList.getRemovedSongs().size() > 0;
+        return removedSongs.size() > 0;
     }
 
-    public HashMap<String, List<SongDAO>> getRemovedSongs(){
-        return removedSongList.getRemovedSongs();
+    public HashMap<String, List<SongDAO>> getRemovedSongs() {
+        return removedSongs;
     }
 }

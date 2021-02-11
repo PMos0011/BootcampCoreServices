@@ -1,5 +1,9 @@
+
 package p.moskwa.bootcampCoreServices.dataModel;
 
+/**
+ * Supported music genres
+ */
 public enum Categories {
     ALTERNATIVE("Alternative"),
     AMBIENT("Ambient"),
@@ -24,10 +28,14 @@ public enum Categories {
 
     private final String category;
 
+
     Categories(String category) {
         this.category = category;
     }
 
+    /**
+     * @return the enum value
+     */
     public String getCategory() {
         return category;
     }

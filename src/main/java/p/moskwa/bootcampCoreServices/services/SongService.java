@@ -2,7 +2,6 @@ package p.moskwa.bootcampCoreServices.services;
 
 import p.moskwa.bootcampCoreServices.dataModel.Song;
 import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
-import p.moskwa.bootcampCoreServices.dataModel.SongList;
 import p.moskwa.bootcampCoreServices.mappers.SongMapper;
 
 import java.util.*;
@@ -11,14 +10,14 @@ import java.util.stream.Collectors;
 import static p.moskwa.bootcampCoreServices.dataModel.Song.UID_SPLITTER;
 
 public class SongService {
-    private final SongList songList;
+    private final HashMap<String, HashMap<String, List<Song>>> songListHashMap;
 
     public SongService() {
-        songList = new SongList();
+        songListHashMap = new HashMap<>();
     }
 
-    public HashMap<String, HashMap<String, List<Song>>> getSortedSongList() {
-        return songList.getSongListHashMap();
+    public HashMap<String, HashMap<String, List<Song>>> getGroupedSongList() {
+        return songListHashMap;
     }
 
     public void updateSongList(List<SongDAO> songDAOList) {
@@ -27,14 +26,14 @@ public class SongService {
 
     public boolean updateSongList(SongDAO songDAO, boolean forceUpdate) {
         Song newSong = SongMapper.INSTANCE.songDAOToSong(songDAO);
-        if (!songList.getSongListHashMap().containsKey(newSong.getCategory().name())) {
-            addNewCategoryToList(songList.getSongListHashMap(), newSong);
+        if (!songListHashMap.containsKey(newSong.getCategory().name())) {
+            addNewCategoryToList(songListHashMap, newSong);
         } else {
-            if (!songList.getSongListHashMap().get(newSong.getCategory().name()).containsKey(newSong.getAuthor())) {
-                addNewAuthorToList(songList.getSongListHashMap().get(newSong.getCategory().name()), newSong);
+            if (!songListHashMap.get(newSong.getCategory().name()).containsKey(newSong.getAuthor())) {
+                addNewAuthorToList(songListHashMap.get(newSong.getCategory().name()), newSong);
             } else {
                 if (forceUpdate)
-                    addSongToList(songList.getSongListHashMap().get(newSong.getCategory().name()).get(newSong.getAuthor()),
+                    addSongToList(songListHashMap.get(newSong.getCategory().name()).get(newSong.getAuthor()),
                             newSong);
                 else
                     return false;
@@ -45,7 +44,7 @@ public class SongService {
 
     public Song getSongFromUid(String songUid) {
         String[] uid = songUid.split(UID_SPLITTER);
-        return songList.getSongListHashMap().get(uid[0]).get(uid[1])
+        return songListHashMap.get(uid[0]).get(uid[1])
                 .stream()
                 .filter(song -> song.getTitle().equals(uid[2]))
                 .findFirst().orElse(null);
@@ -75,13 +74,13 @@ public class SongService {
     }
 
     public void resetAllSongVotes() {
-        songList.getSongListHashMap().forEach((category, authors) -> authors
+        songListHashMap.forEach((category, authors) -> authors
                 .forEach((author, songs) -> songs.forEach(song ->
                         song.setVotes(0))
                 ));
     }
 
-    public List<Song> getSortedSongList(String category) {
+    public List<Song> getGroupedSongList(String category) {
         List<Song> listToSort = getSongListFromHashMap(category);
 
         return listToSort.stream()
@@ -92,12 +91,12 @@ public class SongService {
     private List<Song> getSongListFromHashMap(String category) {
         List<Song> newSongList = new ArrayList<>();
         if (category != null) {
-            if (songList.getSongListHashMap().containsKey(category))
-                songList.getSongListHashMap().get(category)
+            if (songListHashMap.containsKey(category))
+                songListHashMap.get(category)
                         .forEach((author, list) -> newSongList.addAll(list));
 
         } else
-            songList.getSongListHashMap().forEach((cat, authors) -> authors
+            songListHashMap.forEach((cat, authors) -> authors
                     .forEach((author, list) -> newSongList.addAll(list)));
 
         return newSongList;

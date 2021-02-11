@@ -1,6 +1,12 @@
 package p.moskwa.bootcampCoreServices.dataModel;
 
+/**
+ * Represent valid song
+ */
 public class Song {
+    /**
+     * Constant String used to generate song unique id
+     */
     public final static String UID_SPLITTER = "<!splitter!>";
 
     private String title;
