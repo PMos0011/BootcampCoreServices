@@ -10,8 +10,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * .csv file handler
+ *
+ * @see SongsFileHandler
+ */
 public class CSVSongsFileHandler implements SongsFileHandler {
 
+    /**
+     * Reads SongDAO object data from .csv file.
+     * File must have column names in header
+     *
+     * @param file file with song data to read
+     * @return unverified SongDAO as collection
+     * @see SongDAO
+     */
     @Override
     public List<SongDAO> readSongsFromFile(File file) {
         CsvSchema schema = CsvSchema.emptySchema().withHeader();

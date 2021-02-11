@@ -7,6 +7,12 @@ import p.moskwa.bootcampCoreServices.gui.services.SongMenuServices;
 
 import javax.swing.*;
 
+/**
+ * Application menu bar
+ *
+ * @see FileChooser
+ * @since 1.0
+ */
 public class MenuBar extends FileChooser {
     private final JMenuBar menu;
     private final FileMenuServices fileMenuServices;
@@ -20,6 +26,11 @@ public class MenuBar extends FileChooser {
         menu = menuConstructor();
     }
 
+    /**
+     * Returns menu bar
+     *
+     * @return menu bar as{@link JMenuBar}
+     */
     public JMenuBar getMenu() {
         return menu;
     }

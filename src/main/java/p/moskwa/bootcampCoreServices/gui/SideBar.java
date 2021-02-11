@@ -12,6 +12,11 @@ import java.lang.reflect.Field;
 import static p.moskwa.bootcampCoreServices.dataModel.TranslateSongFieldsName.translateFieldNameToPl;
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
+/**
+ * Application side bar container
+ *
+ * @since 1.0
+ */
 public class SideBar extends InterfaceClear {
     private final JPanel sideBar;
     private final SideBarServices sideBarServices;
@@ -24,10 +29,18 @@ public class SideBar extends InterfaceClear {
         sideBarServices = new SideBarServices();
     }
 
+    /**
+     * Returns side bar container
+     *
+     * @return content as {@link JPanel}
+     */
     public JPanel getSideBarContent() {
         return sideBar;
     }
 
+    /**
+     * Creates adn displays error confirmation content
+     */
     public void displayErrorConfirmButton() {
         clearView(sideBar);
 
@@ -36,6 +49,11 @@ public class SideBar extends InterfaceClear {
         sideBar.add(confirmErrorButton);
     }
 
+    /**
+     * Creates and displays song detail content
+     *
+     * @param song selected song
+     */
     public void displaySongDetails(Song song) {
         clearView(sideBar);
 
@@ -62,10 +80,9 @@ public class SideBar extends InterfaceClear {
         getMainWindowInstance().revalidate();
     }
 
-    public void clearSidebar(){
-        clearView(sideBar);
-    }
-
+    /**
+     * Creates and displays new song form
+     */
     public void displayNewSongForm() {
         clearView(sideBar);
 
@@ -95,5 +112,12 @@ public class SideBar extends InterfaceClear {
 
         sideBar.add(newSongForm);
         getMainWindowInstance().revalidate();
+    }
+
+    /**
+     * Removes all content from side bar container
+     */
+    public void clearSidebar() {
+        clearView(sideBar);
     }
 }

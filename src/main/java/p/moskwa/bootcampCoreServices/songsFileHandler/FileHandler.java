@@ -5,8 +5,23 @@ import p.moskwa.bootcampCoreServices.dataModel.SongDAO;
 import java.io.File;
 import java.util.List;
 
+/**
+ * Song file handler
+ *
+ * @since 1.0
+ */
 public class FileHandler {
 
+    /**
+     * Determines instance of file handler depending on input file
+     *
+     * @param file input song file
+     * @return unverified SongDAO as collection
+     * @see SongDAO
+     * @see CSVSongsFileHandler
+     * @see XMLSongsFileHandler
+     * @see SupportedFiles
+     */
     public List<SongDAO> readSongsFromFile(File file) {
         SupportedFiles extension = getExtension(file);
 

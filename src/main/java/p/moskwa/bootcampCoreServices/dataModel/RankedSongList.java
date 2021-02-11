@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * Represent songs ranking as collection
+ *
+ * @since 1.0
  */
 public class RankedSongList {
     int place;
@@ -27,7 +29,7 @@ public class RankedSongList {
     /**
      * Sets ranking position of songs collection
      *
-     * @param place
+     * @param place ranking position as int
      */
     public void setPlace(int place) {
         this.place = place;

@@ -6,6 +6,11 @@ import p.moskwa.bootcampCoreServices.services.SongService;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Application root container
+ *
+ * @since 1.0
+ */
 public class MainWindow extends JFrame {
 
     private static MainWindow mainWindow;
@@ -55,7 +60,7 @@ public class MainWindow extends JFrame {
         return removedSongsServices;
     }
 
-    public void updateMainContent() {
+    public void updateContent() {
         if (removedSongsServices.isErrorToDisplay())
             mainContentPanel.displayInvalidSongs(removedSongsServices.getRemovedSongs());
         else

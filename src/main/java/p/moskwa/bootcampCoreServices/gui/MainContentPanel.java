@@ -13,6 +13,12 @@ import java.util.concurrent.atomic.AtomicReference;
 
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
+/**
+ * Application main content container
+ *
+ * @see InterfaceClear
+ * @since 1.0
+ */
 public class MainContentPanel extends InterfaceClear {
     private final String TABULATOR = "    ";
 
@@ -28,10 +34,21 @@ public class MainContentPanel extends InterfaceClear {
         mainContentService = new MainContentService();
     }
 
+    /**
+     * Returns main content container
+     *
+     * @return content as {@link JPanel}
+     */
     public JPanel getContent() {
         return content;
     }
 
+    /**
+     * Creates and displays content with rejected songs
+     *
+     * @param removedSongs rejected songs as collection
+     * @see p.moskwa.bootcampCoreServices.services.RemovedSongsServices
+     */
     public void displayInvalidSongs(HashMap<String, List<SongDAO>> removedSongs) {
         clearView(content);
 
@@ -58,6 +75,12 @@ public class MainContentPanel extends InterfaceClear {
         getMainWindowInstance().revalidate();
     }
 
+    /**
+     * Creates and displays content with valid songs
+     *
+     * @param songList valid songs as collection
+     * @see p.moskwa.bootcampCoreServices.services.SongService
+     */
     public void displaySongs(HashMap<String, HashMap<String, List<Song>>> songList) {
         clearView(content);
 
@@ -83,6 +106,12 @@ public class MainContentPanel extends InterfaceClear {
         getMainWindowInstance().revalidate();
     }
 
+    /**
+     * Creates and displays content with songs ranking report
+     *
+     * @param rankingList {@link RankedSongList} as collection
+     * @see p.moskwa.bootcampCoreServices.gui.services.ReportMenuServices
+     */
     public void displayReport(List<RankedSongList> rankingList) {
         clearView(content);
         if (rankingList.size() < 1) {

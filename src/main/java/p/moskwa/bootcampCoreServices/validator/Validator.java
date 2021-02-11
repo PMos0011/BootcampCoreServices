@@ -8,8 +8,20 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * SongDAO validator
+ *
+ * @see SongDAO
+ * @since 1.0
+ */
 public class Validator {
 
+    /**
+     * Removes invalid SongsDAOs
+     *
+     * @param songDAOList {@link SongDAO} as collection
+     * @return {@link SongDAO} as collection
+     */
     public List<SongDAO> validateSongDAOList(List<SongDAO> songDAOList) {
         List<SongDAO> removedSongs = new ArrayList<>();
 
@@ -24,6 +36,12 @@ public class Validator {
         return removedSongs;
     }
 
+    /**
+     * Validates fields in SongDAO
+     *
+     * @param songDAO {@link SongDAO}
+     * @return true if fields value are empty or null
+     */
     public boolean isSongDAOInvalid(SongDAO songDAO) {
         return Arrays.stream(songDAO.getClass().getFields())
                 .anyMatch(field -> {
@@ -40,6 +58,12 @@ public class Validator {
                 });
     }
 
+    /**
+     * Validates votes field
+     *
+     * @param songDAO {@link SongDAO}
+     * @return true if field value includes none numeric characters
+     */
     public boolean isSongVotesInvalid(SongDAO songDAO) {
         String regex = "[0-9]+";
         return !Pattern.compile(regex)

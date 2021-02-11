@@ -26,7 +26,7 @@ public class FileMenuServices {
             getMainWindowInstance().getRemoveSongsServices().clearList();
             File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
             songDAOServices.handleSongListFromFile(file);
-            getMainWindowInstance().updateMainContent();
+            getMainWindowInstance().updateContent();
         }
     }
 
@@ -38,7 +38,7 @@ public class FileMenuServices {
             File directory = new File(fileChooser.getSelectedFile().getAbsolutePath());
             Set<File> files = getAllFilesFromSelectedDirectory(directory);
             files.forEach(songDAOServices::handleSongListFromFile);
-            getMainWindowInstance().updateMainContent();
+            getMainWindowInstance().updateContent();
         }
     }
 

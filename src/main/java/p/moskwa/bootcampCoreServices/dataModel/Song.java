@@ -2,6 +2,8 @@ package p.moskwa.bootcampCoreServices.dataModel;
 
 /**
  * Represent valid song
+ *
+ * @since 1.0
  */
 public class Song {
     /**
