@@ -9,8 +9,20 @@ import java.util.*;
 
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
+/**
+ * Report services
+ *
+ * @since 1.0
+ */
 public class ReportMenuServices {
 
+    /**
+     * Determines type of songs ranking, invoke sort method, create ranking method
+     * and display method
+     *
+     * @param action             calling component data
+     * @param reportButtonsGroup radio buttons selection data
+     */
     public void createReport(ActionEvent action, ButtonGroup reportButtonsGroup) {
         JMenuItem jMenuItem = (JMenuItem) action.getSource();
         ButtonModel radioButton = reportButtonsGroup.getSelection();
@@ -19,12 +31,20 @@ public class ReportMenuServices {
         if (radioButton.getActionCommand() != null)
             iterationCount = Integer.parseInt(radioButton.getActionCommand());
 
-        List<Song> sortedSongList = getMainWindowInstance().getSongService().getGroupedSongList(jMenuItem.getName());
+        List<Song> sortedSongList = getMainWindowInstance().getSongService().getSortedSongList(jMenuItem.getName());
         List<RankedSongList> rankingList = createRankingList(sortedSongList, iterationCount);
         getMainWindowInstance().getSideBar().clearSidebar();
         getMainWindowInstance().getMainContentPanel().displayReport(rankingList);
     }
 
+    /**
+     * Creates chosen by user songs ranking report
+     *
+     * @param sortedSongList sorted songs collection
+     * @param iterationCount maximum ranking positions
+     * @return ranking report as RankedSongLis collection
+     * @see RankedSongList
+     */
     public List<RankedSongList> createRankingList(List<Song> sortedSongList, int iterationCount) {
         List<RankedSongList> rankingList = new ArrayList<>();
         int songCounter = 1;

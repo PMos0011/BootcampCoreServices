@@ -68,9 +68,9 @@ public class SideBar extends InterfaceClear {
             songDetails.add(new JLabel("Gatunek: " + song.getCategory().getCategory()));
             songDetails.add(new JLabel("głosy: " + song.getVotes()));
 
-            JButton addVoice = new JButton("Zagłosuj");
-            addVoice.addActionListener(action -> sideBarServices.addVoice(song, this));
-            songDetails.add(addVoice);
+            JButton addVote = new JButton("Zagłosuj");
+            addVote.addActionListener(action -> sideBarServices.addVote(song, this));
+            songDetails.add(addVote);
             JButton resetVotes = new JButton("Wyzeruj głosy");
             resetVotes.addActionListener(action -> sideBarServices.resetVotes(song, this));
             songDetails.add(resetVotes);

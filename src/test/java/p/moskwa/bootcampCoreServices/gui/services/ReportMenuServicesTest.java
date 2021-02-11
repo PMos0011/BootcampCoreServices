@@ -61,7 +61,7 @@ class ReportMenuServicesTest {
     @Test
     void createReportOneFileTop3() {
         songService.updateSongList(songsFromFile1);
-        List<Song> sortedList = songService.getGroupedSongList(Categories.RAP.name());
+        List<Song> sortedList = songService.getSortedSongList(Categories.RAP.name());
         List<RankedSongList> rankingList = reportMenuServices.createRankingList(sortedList, 3);
 
         assertEquals(3, rankingList.size());
@@ -70,7 +70,7 @@ class ReportMenuServicesTest {
     @Test
     void createReportOneFileTop3ExAequo() {
         songService.updateSongList(songsFromFile3);
-        List<Song> sortedList = songService.getGroupedSongList(Categories.ELECTRONIC.name());
+        List<Song> sortedList = songService.getSortedSongList(Categories.ELECTRONIC.name());
         List<RankedSongList> rankingList = reportMenuServices.createRankingList(sortedList, 3);
 
         assertEquals(2, rankingList.size());
@@ -84,7 +84,7 @@ class ReportMenuServicesTest {
         songService.updateSongList(songsFromFile2);
         songService.updateSongList(songsFromFile3);
 
-        List<Song> sortedList = songService.getGroupedSongList(null);
+        List<Song> sortedList = songService.getSortedSongList(null);
         List<RankedSongList> rankingList = reportMenuServices.createRankingList(sortedList, 0);
 
         assertEquals(10, rankingList.size());

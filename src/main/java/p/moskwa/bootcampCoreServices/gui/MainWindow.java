@@ -68,7 +68,7 @@ public class MainWindow extends JFrame {
     }
 
     public void displaySongs() {
-        mainContentPanel.displaySongs(songService.getGroupedSongList());
+        mainContentPanel.displaySongs(songService.getSortedSongList());
     }
 
     public void displaySongDetails(String songUid) {

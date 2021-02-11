@@ -12,6 +12,11 @@ import java.util.stream.Stream;
 
 import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance;
 
+/**
+ * File menu services
+ *
+ * @since 1.0
+ */
 public class FileMenuServices {
     private final SongDAOServices songDAOServices;
 
@@ -19,6 +24,11 @@ public class FileMenuServices {
         songDAOServices = new SongDAOServices();
     }
 
+    /**
+     * Processes selected file
+     *
+     * @param fileChooser application fileChooser
+     */
     public void openFileAction(JFileChooser fileChooser) {
         fileChooser.setDialogTitle("Wybierz plik");
         fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
@@ -30,6 +40,11 @@ public class FileMenuServices {
         }
     }
 
+    /**
+     * Processes files from selected directory
+     *
+     * @param fileChooser application fileChooser
+     */
     public void openDirectoryAction(JFileChooser fileChooser) {
         fileChooser.setDialogTitle("Wybierz folder");
         fileChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -42,6 +57,9 @@ public class FileMenuServices {
         }
     }
 
+    /**
+     * Exits application
+     */
     public void exitApplication() {
         System.exit(0);
     }

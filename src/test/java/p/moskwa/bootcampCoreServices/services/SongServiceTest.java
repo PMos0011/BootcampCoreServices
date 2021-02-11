@@ -49,7 +49,7 @@ class SongServiceTest {
     @Test
     void updateSongListOneFile() {
         songService.updateSongList(songsFromFile1);
-        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getGroupedSongList();
+        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSortedSongList();
         List<Song> auth1SongsSet = songListMap.get(Categories.RAP.name()).get("auth1");
         List<Song> auth3SongsSet = songListMap.get(Categories.REGGAE.name()).get("auth3");
 
@@ -65,7 +65,7 @@ class SongServiceTest {
         songService.updateSongList(songsFromFile1);
         songService.updateSongList(songsFromFile2);
 
-        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getGroupedSongList();
+        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSortedSongList();
         List<Song> auth1SongsSet = songListMap.get(Categories.RAP.name()).get("auth1");
 
         assertEquals(3, songListMap.size());
@@ -76,7 +76,7 @@ class SongServiceTest {
     @Test
     void getSongFromUid() {
         songService.updateSongList(songsFromFile2);
-        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getGroupedSongList();
+        HashMap<String, HashMap<String, List<Song>>> songListMap = songService.getSortedSongList();
 
         String songUid = SongMapper.INSTANCE.songDAOToSong(songToUidTest).getUid();
         Song songFromUid = songService.getSongFromUid(songUid);
@@ -92,7 +92,7 @@ class SongServiceTest {
     void getSortedSongListAllCategory(){
         songService.updateSongList(songsFromFile1);
 
-        List<Song> sortedList = songService.getGroupedSongList(null);
+        List<Song> sortedList = songService.getSortedSongList(null);
         assertEquals(5,sortedList.size());
     }
 
@@ -100,7 +100,7 @@ class SongServiceTest {
     void getSortedSongListOneCategory(){
         songService.updateSongList(songsFromFile1);
 
-        List<Song> sortedList = songService.getGroupedSongList(Categories.REGGAE.name());
+        List<Song> sortedList = songService.getSortedSongList(Categories.REGGAE.name());
         assertEquals(1,sortedList.size());
     }
 }

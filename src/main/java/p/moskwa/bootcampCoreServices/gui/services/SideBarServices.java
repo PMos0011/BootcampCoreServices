@@ -17,6 +17,11 @@ import static p.moskwa.bootcampCoreServices.gui.MainWindow.getMainWindowInstance
 import static p.moskwa.bootcampCoreServices.gui.MessageDialog.showConfirmDialog;
 import static p.moskwa.bootcampCoreServices.gui.MessageDialog.showMessage;
 
+/**
+ * Side bar content container services
+ *
+ * @since 1.0
+ */
 public class SideBarServices {
 
     private final String TITLE = "Dodaj piosenkę";
@@ -24,16 +29,38 @@ public class SideBarServices {
     private final String INFO = "Piosenka dodana! Jak nie wierzysz, sprawdź na liście.";
     private final String CONFIRM = "Piosenka jest już na liście ale jak chcesz to mogę zsumować głosy.";
 
-    public void addVoice(Song song, SideBar sideBar) {
-        getMainWindowInstance().getSongService().addVoicesToSong(song, 1);
+    /**
+     * Adds one vote to song by invoking addVotesToSong method
+     *
+     * @param song    song to increment votes count
+     * @param sideBar calling method side bar
+     * @see p.moskwa.bootcampCoreServices.services.SongService
+     */
+    public void addVote(Song song, SideBar sideBar) {
+        getMainWindowInstance().getSongService().addVotesToSong(song, 1);
         sideBar.displaySongDetails(song);
     }
 
+    /**
+     * Adds song votes by invoking resetSongVotes method
+     *
+     * @param song    song to reset votes
+     * @param sideBar calling method side bar
+     * @see p.moskwa.bootcampCoreServices.services.SongService
+     */
     public void resetVotes(Song song, SideBar sideBar) {
         getMainWindowInstance().getSongService().resetSongVotes(song);
         sideBar.displaySongDetails(song);
     }
 
+    /**
+     * Validates new song, adds it to song collection by invoking validator methods
+     * and updateSongList method
+     *
+     * @param form input form with new song data
+     * @see p.moskwa.bootcampCoreServices.services.SongService
+     * @see Validator
+     */
     public void addSongToList(JPanel form) {
         SongDAO newSong = createSongDaoFromForm(form);
 

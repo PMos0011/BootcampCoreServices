@@ -1,0 +1,8 @@
+p.moskwa.bootcampCoreServices
+p.moskwa.bootcampCoreServices.dataModel
+p.moskwa.bootcampCoreServices.gui
+p.moskwa.bootcampCoreServices.gui.services
+p.moskwa.bootcampCoreServices.mappers
+p.moskwa.bootcampCoreServices.services
+p.moskwa.bootcampCoreServices.songsFileHandler
+p.moskwa.bootcampCoreServices.validator
