@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>p.moskwa</groupId>
-    <artifactId>BootcampCoreServices</artifactId>
+    <artifactId>botcampcoreservices</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
 
@@ -56,6 +56,25 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <version>3.2.0</version>
@@ -89,7 +108,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        p.moskwa.bootcampCoreServices.BootcampCoreServices
+                                        p.moskwa.bootcampcoreservices.BootcampCoreServices
                                     </mainClass>
                                 </manifest>
                             </archive>
