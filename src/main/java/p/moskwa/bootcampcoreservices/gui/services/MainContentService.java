@@ -1,6 +1,5 @@
 package p.moskwa.bootcampcoreservices.gui.services;
 
-
 import javax.swing.JLabel;
 
 import java.awt.Color;

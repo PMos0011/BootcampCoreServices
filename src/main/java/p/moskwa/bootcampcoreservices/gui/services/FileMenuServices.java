@@ -1,6 +1,5 @@
 package p.moskwa.bootcampcoreservices.gui.services;
 
-import org.jetbrains.annotations.NotNull;
 import p.moskwa.bootcampcoreservices.services.SongDAOServices;
 
 import javax.swing.JFileChooser;
@@ -63,7 +62,7 @@ public class FileMenuServices {
         System.exit(0);
     }
 
-    private Set<File> getAllFilesFromSelectedDirectory(@NotNull File directory) {
+    private Set<File> getAllFilesFromSelectedDirectory(File directory) {
         return Stream.of(directory.listFiles())
                 .filter(file -> !file.isDirectory())
                 .collect(Collectors.toSet());
