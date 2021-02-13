@@ -1,5 +1,9 @@
 package p.moskwa.bootcampcoreservices.datamodel;
 
+import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represent valid song
  *
@@ -69,5 +73,31 @@ public class Song {
     @Override
     public String toString() {
         return author + " - " + title;
+    }
+
+    /**
+     * Creates name: value String
+     *
+     * @param song song to extract details
+     * @return field name in Polish with colon separated value as collection of {@link String}
+     */
+    public List<String> getSongDetailsInPolish(Song song) {
+        List<String> songDetails = new ArrayList<>();
+
+        for (Field field : Song.class.getDeclaredFields()) {
+            String polishFieldName = SongDAO.translateFieldNameToPolish(field.getName());
+            if (polishFieldName != null) {
+                try {
+                    polishFieldName += ": ";
+                    if (field.getName().equals("category")) {
+                        songDetails.add(polishFieldName + song.getCategory().getCategory());
+                    } else {
+                        songDetails.add(polishFieldName + field.get(song));
+                    }
+                } catch (IllegalAccessException ignored) {
+                }
+            }
+        }
+        return songDetails;
     }
 }

@@ -25,8 +25,9 @@ public class RemovedSongsServices {
      * @param fileName         source file name
      */
     public void updateRemovedSongsList(List<SongDAO> removedSongsList, String fileName) {
-        if (removedSongsList.size() > 0)
+        if (removedSongsList.size() > 0) {
             removedSongs.put(fileName, removedSongsList);
+        }
     }
 
     /**

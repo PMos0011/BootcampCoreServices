@@ -40,10 +40,10 @@ public class SongDAO {
     }
 
     /**
-     * Translates class filed name to polish
+     * Translates class filed name to Polish
      *
      * @param fieldName field name as {@link String}
-     * @return translated field name
+     * @return translated field name, null if not found
      */
     public static String translateFieldNameToPolish(String fieldName) {
         try {

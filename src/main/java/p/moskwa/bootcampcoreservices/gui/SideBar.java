@@ -5,8 +5,15 @@ import p.moskwa.bootcampcoreservices.datamodel.Song;
 import p.moskwa.bootcampcoreservices.datamodel.SongDAO;
 import p.moskwa.bootcampcoreservices.gui.services.SideBarServices;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JComponent;
+import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.GridLayout;
 import java.lang.reflect.Field;
 
 import static p.moskwa.bootcampcoreservices.gui.MainWindow.getMainWindowInstance;
@@ -61,11 +68,8 @@ public class SideBar extends InterfaceClear {
             songDetails.setBackground(Color.LIGHT_GRAY);
             songDetails.setLayout(new GridLayout(0, 1));
 
-            songDetails.add(new JLabel("Tytuł: " + song.getTitle()));
-            songDetails.add(new JLabel("Wykonawca: " + song.getAuthor()));
-            songDetails.add(new JLabel("Album: " + song.getAlbum()));
-            songDetails.add(new JLabel("Gatunek: " + song.getCategory().getCategory()));
-            songDetails.add(new JLabel("Głosy: " + song.getVotes()));
+            song.getSongDetailsInPolish(song)
+                    .forEach(detail -> songDetails.add(new JLabel(detail)));
 
             JButton addVote = new JButton("Zagłosuj");
             addVote.addActionListener(action -> sideBarServices.addVote(song, this));
@@ -96,10 +100,11 @@ public class SideBar extends InterfaceClear {
             JComponent jField;
             JLabel jLabel = new JLabel(SongDAO.translateFieldNameToPolish(field.getName()));
 
-            if (field.getName().equals("category"))
+            if (field.getName().equals("category")) {
                 jField = new JComboBox(Categories.values());
-            else
+            } else {
                 jField = new JFormattedTextField();
+            }
 
             jField.setName(field.getName());
             newSongForm.add(jLabel);

@@ -1,4 +1,3 @@
-
 package p.moskwa.bootcampcoreservices.datamodel;
 
 /**

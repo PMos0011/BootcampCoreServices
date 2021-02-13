@@ -5,7 +5,12 @@ import p.moskwa.bootcampcoreservices.gui.services.FileMenuServices;
 import p.moskwa.bootcampcoreservices.gui.services.ReportMenuServices;
 import p.moskwa.bootcampcoreservices.gui.services.SongMenuServices;
 
-import javax.swing.*;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JRadioButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JSeparator;
 
 /**
  * Application menu bar

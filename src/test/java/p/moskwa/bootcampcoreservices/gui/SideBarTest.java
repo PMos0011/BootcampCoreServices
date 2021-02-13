@@ -14,11 +14,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class SideBarTest {
-
+    private static final Categories CATEGORY_TO_TEST = Categories.ALTERNATIVE;
     private static final String TITLE = "fak yea";
     private static final String AUTHOR = "blahblah";
     private static final String ALBUM = "blah";
     private static final String VOTES = "100";
+    private static final String CATEGORY = CATEGORY_TO_TEST.getCategory();
 
     static MainWindow mw;
     static JPanel content;
@@ -27,7 +28,7 @@ public class SideBarTest {
 
     @BeforeAll
     static void beforeAllSetUp() {
-        songToAdd = new SongDAO(TITLE, AUTHOR, ALBUM, Categories.ALTERNATIVE.getCategory(), VOTES);
+        songToAdd = new SongDAO(TITLE, AUTHOR, ALBUM, CATEGORY, VOTES);
 
         mw = new MainWindow();
         content = mw.getMainContentPanel().getContent();
@@ -60,7 +61,7 @@ public class SideBarTest {
     @Order(2)
     void displaySongDetails() {
         Song song = mw.getSongService().getSortedSongList()
-                .get(Categories.ALTERNATIVE.name()).get(AUTHOR)
+                .get(CATEGORY_TO_TEST.name()).get(AUTHOR)
                 .get(0);
 
         mw.getSideBar().displaySongDetails(song);

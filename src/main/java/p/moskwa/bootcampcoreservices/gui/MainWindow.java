@@ -3,8 +3,8 @@ package p.moskwa.bootcampcoreservices.gui;
 import p.moskwa.bootcampcoreservices.services.RemovedSongsServices;
 import p.moskwa.bootcampcoreservices.services.SongService;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JFrame;
+import java.awt.BorderLayout;
 
 /**
  * Application root container
@@ -63,10 +63,11 @@ public class MainWindow extends JFrame {
     }
 
     public void updateContent() {
-        if (removedSongsServices.isErrorToDisplay())
+        if (removedSongsServices.isErrorToDisplay()) {
             mainContentPanel.displayInvalidSongs(removedSongsServices.getRemovedSongs());
-        else
+        } else {
             displaySongs();
+        }
     }
 
     public void displaySongs() {

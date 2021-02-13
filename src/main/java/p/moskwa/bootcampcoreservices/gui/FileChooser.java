@@ -2,7 +2,7 @@ package p.moskwa.bootcampcoreservices.gui;
 
 import p.moskwa.bootcampcoreservices.songsfilehandler.SupportedFiles;
 
-import javax.swing.*;
+import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.util.Arrays;

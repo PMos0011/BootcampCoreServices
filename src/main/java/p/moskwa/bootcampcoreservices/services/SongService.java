@@ -4,7 +4,10 @@ import p.moskwa.bootcampcoreservices.datamodel.Song;
 import p.moskwa.bootcampcoreservices.datamodel.SongDAO;
 import p.moskwa.bootcampcoreservices.mappers.SongMapper;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import static p.moskwa.bootcampcoreservices.datamodel.Song.UID_SPLITTER;
@@ -58,11 +61,12 @@ public class SongService {
             if (!songListHashMap.get(newSong.getCategory().name()).containsKey(newSong.getAuthor())) {
                 addNewAuthorToList(songListHashMap.get(newSong.getCategory().name()), newSong);
             } else {
-                if (forceUpdate)
+                if (forceUpdate) {
                     addSongToList(songListHashMap.get(newSong.getCategory().name()).get(newSong.getAuthor()),
                             newSong);
-                else
+                } else {
                     return false;
+                }
             }
         }
         return true;
@@ -135,22 +139,22 @@ public class SongService {
                 break;
             }
         }
-
-        if (isNewSong)
+        if (isNewSong) {
             songs.add(newSong);
+        }
     }
 
     private List<Song> getSongListFromHashMap(String category) {
         List<Song> newSongList = new ArrayList<>();
         if (category != null) {
-            if (songListHashMap.containsKey(category))
+            if (songListHashMap.containsKey(category)) {
                 songListHashMap.get(category)
                         .forEach((author, list) -> newSongList.addAll(list));
-
-        } else
+            }
+        } else {
             songListHashMap.forEach((cat, authors) -> authors
                     .forEach((author, list) -> newSongList.addAll(list)));
-
+        }
         return newSongList;
     }
 

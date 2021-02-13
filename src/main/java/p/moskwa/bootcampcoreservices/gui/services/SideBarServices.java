@@ -7,13 +7,16 @@ import p.moskwa.bootcampcoreservices.gui.MessageDialog;
 import p.moskwa.bootcampcoreservices.gui.SideBar;
 import p.moskwa.bootcampcoreservices.validator.Validator;
 
-import javax.swing.*;
-
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JComboBox;
+import javax.swing.JTextField;
+import java.awt.Component;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 
-import static javax.swing.JOptionPane.*;
+import static javax.swing.JOptionPane.WARNING_MESSAGE;
+import static javax.swing.JOptionPane.INFORMATION_MESSAGE;
+import static javax.swing.JOptionPane.YES_OPTION;
 import static p.moskwa.bootcampcoreservices.gui.MainWindow.getMainWindowInstance;
 
 /**
@@ -70,14 +73,15 @@ public class SideBarServices {
         SongDAO newSong = createSongDaoFromForm(form);
 
         Validator validator = new Validator();
-        if (validator.isSongDAOInvalid(newSong) || validator.isSongVotesInvalid(newSong))
+        if (validator.isSongDAOInvalid(newSong) || validator.isSongVotesInvalid(newSong)) {
             messageDialog.showMessage(TITLE, WARNING, WARNING_MESSAGE);
-        else {
-            if (getMainWindowInstance().getSongService().updateSongList(newSong, false))
+        } else {
+            if (getMainWindowInstance().getSongService().updateSongList(newSong, false)) {
                 messageDialog.showMessage(TITLE, INFO, INFORMATION_MESSAGE);
-            else {
-                if (messageDialog.showConfirmDialog(TITLE, CONFIRM) == YES_OPTION)
+            } else {
+                if (messageDialog.showConfirmDialog(TITLE, CONFIRM) == YES_OPTION) {
                     getMainWindowInstance().getSongService().updateSongList(newSong, true);
+                }
             }
             getMainWindowInstance().displaySongs();
         }
@@ -89,8 +93,9 @@ public class SideBarServices {
         for (Field field : newSong.getClass().getFields()) {
             Component jComponent = Arrays.stream(form.getComponents())
                     .filter(component -> {
-                        if (component.getName() != null)
+                        if (component.getName() != null) {
                             return component.getName().equals(field.getName());
+                        }
                         return false;
                     })
                     .findFirst()

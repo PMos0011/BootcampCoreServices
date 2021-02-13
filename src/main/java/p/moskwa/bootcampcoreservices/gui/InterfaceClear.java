@@ -1,6 +1,7 @@
 package p.moskwa.bootcampcoreservices.gui;
 
-import javax.swing.*;
+
+import javax.swing.JComponent;
 
 /**
  * Clears GUI view

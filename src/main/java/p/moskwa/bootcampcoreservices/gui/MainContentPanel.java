@@ -5,8 +5,14 @@ import p.moskwa.bootcampcoreservices.datamodel.Song;
 import p.moskwa.bootcampcoreservices.datamodel.SongDAO;
 import p.moskwa.bootcampcoreservices.gui.services.MainContentService;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JLabel;
+import javax.swing.ScrollPaneConstants;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.Color;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicReference;
@@ -145,8 +151,9 @@ public class MainContentPanel extends InterfaceClear {
     private JScrollPane createJScrollPane(JPanel panel, int height) {
         JScrollPane jScrollPane = new JScrollPane(panel);
 
-        if (height > 700)
+        if (height > 700) {
             height = 700;
+        }
 
         jScrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         jScrollPane.getVerticalScrollBar().setUnitIncrement(10);

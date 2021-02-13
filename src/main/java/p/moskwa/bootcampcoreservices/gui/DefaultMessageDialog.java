@@ -1,6 +1,6 @@
 package p.moskwa.bootcampcoreservices.gui;
 
-import javax.swing.*;
+import javax.swing.JOptionPane;
 
 /**
  * Application default message dialogs

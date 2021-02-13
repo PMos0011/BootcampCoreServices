@@ -3,9 +3,13 @@ package p.moskwa.bootcampcoreservices.gui.services;
 import p.moskwa.bootcampcoreservices.datamodel.RankedSongList;
 import p.moskwa.bootcampcoreservices.datamodel.Song;
 
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JMenuItem;
+import javax.swing.ButtonModel;
 import java.awt.event.ActionEvent;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
 
 import static p.moskwa.bootcampcoreservices.gui.MainWindow.getMainWindowInstance;
 
@@ -28,8 +32,9 @@ public class ReportMenuServices {
         ButtonModel radioButton = reportButtonsGroup.getSelection();
 
         int iterationCount = 0;
-        if (radioButton.getActionCommand() != null)
+        if (radioButton.getActionCommand() != null) {
             iterationCount = Integer.parseInt(radioButton.getActionCommand());
+        }
 
         List<Song> sortedSongList = getMainWindowInstance().getSongService().getSortedSongList(jMenuItem.getName());
         List<RankedSongList> rankingList = createRankingList(sortedSongList, iterationCount);
@@ -59,8 +64,9 @@ public class ReportMenuServices {
                 rankingList.get(rankingList.size() - 1).getSongList().add(currentSong);
             } else {
                 rankingPlace = songCounter;
-                if (iterationCount != 0 && rankingPlace > iterationCount)
+                if (iterationCount != 0 && rankingPlace > iterationCount) {
                     break;
+                }
 
                 RankedSongList newRankedList = new RankedSongList();
                 newRankedList.setPlace(rankingPlace);

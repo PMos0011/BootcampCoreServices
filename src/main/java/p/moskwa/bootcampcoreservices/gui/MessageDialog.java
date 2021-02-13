@@ -1,7 +1,5 @@
 package p.moskwa.bootcampcoreservices.gui;
 
-import javax.swing.*;
-
 /**
  * Message dialogs behavior
  *
@@ -14,7 +12,6 @@ public interface MessageDialog {
      * @param title   message dialog title as {@link String}
      * @param message message as {@link String}
      * @param type    message dialog type as int
-     * @see JOptionPane
      */
     void showMessage(String title, String message, int type);
 
@@ -24,7 +21,6 @@ public interface MessageDialog {
      * @param title   confirm dialog title as {@link String}
      * @param message message as {@link String}
      * @return selected option as int
-     * @see JOptionPane
      */
     int showConfirmDialog(String title, String message);
 }
