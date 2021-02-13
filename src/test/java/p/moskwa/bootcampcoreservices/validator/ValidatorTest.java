@@ -17,7 +17,7 @@ public class ValidatorTest {
     void setUp() {
         validator = new Validator();
 
-        SongDAO correctSong = new SongDAO("Imported", "Jessie Rayez", "Before Love...", "RnB", "10");
+        SongDAO correctSong = new SongDAO("Imported", "Jessie Rayez", "Before Love...", "Funk", "10");
         SongDAO correctSongWithSpacesAfter = new SongDAO("Title     ", "Auth    ", "Album...    ", "Rock    ", "3    ");
         SongDAO invalidCategorySong = new SongDAO("invalid category", "Halsey", "Manic", "Country pop", "3");
         SongDAO invalidVotesSong = new SongDAO("invalid votes", "Halsey", "Manic", "Country pop", "k3");

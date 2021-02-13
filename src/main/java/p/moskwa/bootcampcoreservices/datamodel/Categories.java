@@ -13,6 +13,7 @@ public enum Categories {
     DANCE("Dance"),
     DOWNTEMPO("Downtempo"),
     ELECTRONIC("Electronic"),
+    FUNK("Funk"),
     INDUSTRIAL("Industrial"),
     JAZZ("Jazz"),
     METAL("Metal"),
@@ -21,13 +22,11 @@ public enum Categories {
     PROGRESSIVE("Progressive"),
     RAP("Rap"),
     REGGAE("Reggae"),
-    RNB("RnB"),
     ROCK("Rock"),
     TRANCE("Trance"),
     VOCAL("Vocal");
 
     private final String category;
-
 
     Categories(final String category) {
         this.category = category;

@@ -9,7 +9,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.lang.reflect.Field;
 
-import static p.moskwa.bootcampcoreservices.datamodel.TranslateSongFieldsName.translateFieldNameToPl;
 import static p.moskwa.bootcampcoreservices.gui.MainWindow.getMainWindowInstance;
 
 /**
@@ -92,9 +91,10 @@ public class SideBar extends InterfaceClear {
         newSongForm.setPreferredSize(new Dimension(250, 350));
         newSongForm.add(new JLabel("Dodaj piosenkę"));
 
+
         for (Field field : SongDAO.class.getFields()) {
             JComponent jField;
-            JLabel jLabel = new JLabel(translateFieldNameToPl(field.getName()));
+            JLabel jLabel = new JLabel(SongDAO.translateFieldNameToPolish(field.getName()));
 
             if (field.getName().equals("category"))
                 jField = new JComboBox(Categories.values());

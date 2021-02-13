@@ -19,10 +19,10 @@ public class CSVSongsFileHandler implements SongsFileHandler {
 
     /**
      * Reads SongDAO object data from .csv file.
-     * File must have column names in header
+     * File must have columns name in header
      *
      * @param file .csv file with song data to read
-     * @return unverified SongDAO as collection
+     * @return unverified SongDAOs as collection
      * @see SongDAO
      */
     @Override

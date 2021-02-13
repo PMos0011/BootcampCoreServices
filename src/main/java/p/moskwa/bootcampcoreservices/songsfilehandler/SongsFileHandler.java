@@ -12,5 +12,11 @@ import java.util.List;
  */
 public interface SongsFileHandler {
 
+    /**
+     * Reads song data from file
+     *
+     * @param file file with song data
+     * @return unverified SongDAOs as collection
+     */
     List<SongDAO> readSongsFromFile(File file);
 }

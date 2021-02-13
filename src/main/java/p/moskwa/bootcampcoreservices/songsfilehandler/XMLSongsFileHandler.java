@@ -20,7 +20,7 @@ public class XMLSongsFileHandler implements SongsFileHandler {
      * Reads SongDAO object data from .xml file.
      *
      * @param file .xml file with song data to read
-     * @return unverified SongDAO as collection
+     * @return unverified SongDAOs as collection
      * @see SongDAO
      */
     @Override
