@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<songs>
+    <song>
+        <title>Hell Is Round The Corner</title>
+        <author>Tricky</author>
+        <votes>10</votes>
+        <album>Maxinquaye</album>
+        <category>Downtempo</category>
+    </song>
+    <song>
+        <title>Unfinished Sympathy</title>
+        <category>Downtempo</category>
+        <votes>-91</votes>
+        <author>Massive Attack</author>
+        <album>Blue Lines</album>
+    </song>
+    <song>
+        <title>Dieu Reconnaitra Les Siens</title>
+        <author>DJ Cam</author>
+        <category>Trip hop</category>
+        <votes>63</votes>
+        <album>Underground Vibes</album>
+    </song>
+    <song>
+        <title>Hi Scores</title>
+        <votes>26</votes>
+        <category>Downtempo</category>
+        <album>Hi Scores</album>
+    </song>
+    <song>
+        <title>Cook For You</title>
+        <author>Howie B</author>
+        <votes>10</votes>
+        <category>Downtempo</category>
+        <album>Snatch</album>
+    </song>
+    <song>
+        <title>Mindphaser</title>
+        <category>Industrial</category>
+        <votes>2</votes>
+        <author>Front Line Assembly</author>
+        <album>Front Line Assembly</album>
+    </song>
+    <song>
+        <title>Headhunter</title>
+        <author>Front 242</author>
+        <category>Industrial</category>
+        <votes>6</votes>
+        <album>Re:boot</album>
+    </song>
+</songs>

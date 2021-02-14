@@ -21,7 +21,7 @@ public class FileChooser {
                 new FileNameExtensionFilter("Obsługiwane pliki",
                         Arrays.stream(SupportedFiles.values()).map(Enum::name).toArray(String[]::new)
                 ));
-        fileChooser.setCurrentDirectory(new File("."));
+        fileChooser.setCurrentDirectory(new File("../SampleFiles/"));
     }
 
     public JFileChooser getFileChooser() {

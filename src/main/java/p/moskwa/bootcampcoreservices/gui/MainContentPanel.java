@@ -65,7 +65,7 @@ public class MainContentPanel extends InterfaceClear {
         removedSongs.forEach((fileName, songs) -> {
             errorContent.add(new JLabel("W pliku:"));
             errorContent.add(new JLabel(fileName));
-            errorContent.add(new JLabel("ignoruje z powodu błędów:"));
+            errorContent.add(new JLabel("ignoruję z powodu błędów:"));
             heightCounter.updateAndGet(v -> v + 60);
 
             songs.forEach(value -> {

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<songs>
+    <song>
+        <title>Hell Is Round The Corner</title>
+        <author>Tricky</author>
+        <votes>10</votes>
+        <album>Maxinquaye</album>
+        <category>Downtempo</category>
+    </song>
+    <song>
+        <title>Unfinished Sympathy</title>
+        <category>Downtempo</category>
+        <votes>91</votes>
+        <author>Massive Attack</author>
+        <album>Blue Lines</album>
+    </song>
+    <song>
+        <title>Dieu Reconnaitra Les Siens</title>
+        <author>DJ Cam</author>
+        <category>Downtempo</category>
+        <votes>63</votes>
+        <album>Underground Vibes</album>
+    </song>
+    <song>
+        <title>Hi Scores</title>
+        <author>Boards Of Canada</author>
+        <votes>26</votes>
+        <category>Downtempo</category>
+        <album>Hi Scores</album>
+    </song>
+    <song>
+        <title>Cook For You</title>
+        <author>Howie B</author>
+        <votes>10</votes>
+        <category>Downtempo</category>
+        <album>Snatch</album>
+    </song>
+    <song>
+        <title>Inosan</title>
+        <category>Downtempo</category>
+        <votes>2</votes>
+        <author>DJ Food</author>
+        <album>A Recipe For Disaster</album>
+    </song>
+    <song>
+        <title>Rocksteady</title>
+        <author>Young Echo</author>
+        <category>Downtempo</category>
+        <votes>6</votes>
+        <album>Rocksteady</album>
+    </song>
+    <song>
+        <title>Untitled Lvls</title>
+        <author>Sunun</author>
+        <category>Downtempo</category>
+        <votes>16</votes>
+        <album>Sunun</album>
+    </song>
+    <song>
+        <title>Low Forties</title>
+        <author>Boreal Massif</author>
+        <category>Downtempo</category>
+        <votes>62</votes>
+        <album>We All Have An Impact</album>
+    </song>
+    <song>
+        <title>Totemism</title>
+        <author>Lucid Dreams</author>
+        <category>Downtempo</category>
+        <votes>45</votes>
+        <album>Lucid Dreams</album>
+    </song>
+</songs>
